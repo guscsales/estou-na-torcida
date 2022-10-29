@@ -7,6 +7,9 @@ module.exports = {
   jit: true,
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Poppins', 'sans-serif'],
+      },
       colors: {
         primary: colors.green[500],
       },

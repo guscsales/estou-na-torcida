@@ -1,4 +1,4 @@
-import './core/global.css';
+import 'thon-ui/core/base.css';
 
 export default function RootLayout({
   children,
