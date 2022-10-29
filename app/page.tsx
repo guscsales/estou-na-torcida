@@ -18,7 +18,12 @@ export default function Home() {
 
     const provider = new TwitterAuthProvider();
 
-    const { user } = await signInWithPopup(auth, provider);
+    const { user: twitterUser } = await signInWithPopup(auth, provider);
+
+    const user = {
+      ...twitterUser,
+      photoURL: twitterUser.photoURL?.replace('_normal', '_400x400'),
+    };
 
     console.log(user);
   }
