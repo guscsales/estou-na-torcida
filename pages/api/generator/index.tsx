@@ -26,7 +26,13 @@ const wideCardComponent = (
     }}
     tw={`w-[1200px] h-[628px] bg-black flex flex-col justify-end pb-7 pl-14`}
   >
-    <div tw="flex items-center">
+    <div
+      style={{
+        backgroundImage: `url(http://localhost:3000/images/fifa-qatar-logo.png)`,
+      }}
+      tw="w-[134px] h-[32px]"
+    />
+    <div tw="flex items-center mt-20">
       <div tw="flex rounded-full w-20 h-20 border-2 border-solid border-white p-0.5 overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -36,14 +42,22 @@ const wideCardComponent = (
         />
       </div>
       <div tw="flex flex-col w-[270px] ml-2">
-        <span tw="text-2xl drop-shadow-md text-white">
+        <span
+          tw="text-2xl text-white"
+          style={{
+            filter:
+              'drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));',
+          }}
+        >
           {firstName} {lastName}
         </span>
         <span
-          tw="text-lg drop-shadow-md text-amber-300"
+          tw="text-lg text-amber-300"
           style={{
             fontFamily: '"SansItalic"',
             lineHeight: '104%',
+            filter:
+              'drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));',
           }}
         >
           #EstouNaTorcida pela Seleção Braseileira no Catar
@@ -56,12 +70,16 @@ const wideCardComponent = (
     >
       Vai Brasil! Rumo ao Hexa!
     </h1>
-    <div
+    <span
+      tw="text-lg text-amber-300"
       style={{
-        backgroundImage: `url(http://localhost:3000/images/fifa-qatar-logo.png)`,
+        filter:
+          'drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));',
+        fontFamily: '"SansItalic"',
       }}
-      tw="w-[134px] h-[32px]"
-    />
+    >
+      Apoie também em estounatorcida.com.br
+    </span>
   </div>
 );
 
