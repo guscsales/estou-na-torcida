@@ -1,4 +1,5 @@
 import './core/global.css';
+import './shared/firebase';
 
 export default function RootLayout({
   children,

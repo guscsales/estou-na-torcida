@@ -1,60 +1,62 @@
-import { Poppins } from '@next/font/google';
+'use client';
 
-const font = Poppins({ weight: '700' });
-const fontItalic = Poppins({ weight: '700', style: 'italic' });
+import WideCard from './components/wide-card';
+import {
+  getAuth,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+  TwitterAuthProvider,
+  signInWithPopup,
+} from 'firebase/auth';
+import './shared/firebase';
+import { User } from './users/models/user';
 
 export default function Home() {
+  async function handleTwitterAuth() {
+    const auth = getAuth();
+    auth.useDeviceLanguage();
+
+    const provider = new TwitterAuthProvider();
+
+    const { user } = await signInWithPopup(auth, provider);
+
+    console.log(user);
+  }
+
+  async function handleFacebookAuth() {
+    const auth = getAuth();
+    auth.useDeviceLanguage();
+
+    const provider = new FacebookAuthProvider();
+    provider.setCustomParameters({
+      display: 'popup',
+    });
+    provider.addScope('public_profile');
+
+    const { user } = await signInWithPopup(auth, provider);
+
+    console.log(user);
+  }
+
+  async function handleGoogleAuth() {
+    const auth = getAuth();
+    auth.useDeviceLanguage();
+
+    const provider = new GoogleAuthProvider();
+
+    const { user } = await signInWithPopup(auth, provider);
+
+    console.log(user);
+  }
+
   return (
-    <div
-      className={`
-        ${font.className} lg:w-[1200px] h-[628px] mx-auto mt-28 
-      `}
-    >
-      <div
-        style={{
-          display: 'flex',
-          backgroundImage: `url(/images/players/neymar-twitter.png)`,
-        }}
-        className={`w-[1200px] h-[628px] bg-no-repeat bg-bottom flex flex-col justify-end pb-7 pl-14`}
-      >
-        <div className="flex gap-2 items-center">
-          <div
-            className="rounded-full w-20 h-20 border-2 border-solid border-white p-0.5 overflow-hidden"
-            aria-label="Foto de Gustavo"
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="https://ca.slack-edge.com/T0259JYFTTK-U02L9EWAA10-2f5925353804-512"
-              className="flex rounded-full"
-              alt="Foto de Gustavo"
-            />
-          </div>
-          <div className="flex flex-col w-[270px]">
-            <span
-              className="text-2xl drop-shadow-md text-white"
-              style={{
-                filter:
-                  'drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));',
-              }}
-            >
-              Gustavo Sales
-            </span>
-            <span
-              className={`${fontItalic.className} text-lg text-amber-300`}
-              style={{
-                filter:
-                  'drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));',
-              }}
-            >
-              #EstouNaTorcida pela Seleção Braseileira no Catar
-            </span>
-          </div>
-        </div>
-        <h1 className="text-white text-8xl w-8/12 my-7 drop-shadow-green">
-          Vai Brasil! Rumo ao Hexa!
-        </h1>
-        <div className="w-[134px] h-[32px] bg-no-repeat bg-[url(/images/fifa-qatar-logo.png)]" />
+    <>
+      <div className="flex gap-2">
+        <button onClick={handleTwitterAuth}>Entrar com Twitter</button>
+        <button onClick={handleFacebookAuth}>Entrar com Facebook</button>
+        <button onClick={handleGoogleAuth}>Entrar com Google</button>
       </div>
-    </div>
+      <WideCard />
+    </>
   );
 }
