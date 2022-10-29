@@ -90,7 +90,7 @@ type Params = {
 export default async function handler(req: NextApiRequest) {
   const { searchParams } = new URL(req.url as string);
 
-  const type = searchParams.get('type');
+  const type = searchParams.get('type') as Params['type'];
   const name = searchParams.get('name');
   let pic = searchParams.get('pic');
 
