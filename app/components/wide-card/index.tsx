@@ -1,16 +1,23 @@
 import { Poppins } from '@next/font/google';
+import React from 'react';
+import classNames from 'classnames';
 
 const font = Poppins({ weight: '700' });
 const fontItalic = Poppins({ weight: '700', style: 'italic' });
 
-export default function WideCard() {
+export default function WideCard(props: React.HTMLAttributes<HTMLElement>) {
+  const className = classNames(
+    `${font.className} scale-[.3] sm:scale-50 w-[1200px] h-[628px] bg-no-repeat bg-bottom flex flex-col justify-end pb-7 pl-14`,
+    props.className
+  );
+
   return (
     <div
       style={{
         display: 'flex',
         backgroundImage: `url(/images/players/neymar-twitter.png)`,
       }}
-      className={`${font.className} scale-50 w-[1200px] h-[628px] bg-no-repeat bg-bottom flex flex-col justify-end pb-7 pl-14`}
+      className={className}
     >
       <div className="w-[134px] h-[32px] bg-no-repeat bg-[url(/images/fifa-qatar-logo.png)]" />
       <div className="flex gap-2 items-center mt-20">
@@ -39,7 +46,7 @@ export default function WideCard() {
       <span
         className={`${fontItalic.className} text-lg text-amber-300 drop-shadow-md`}
       >
-        Apoie também em <u>estounatorcida.com.br</u>
+        Apoie também em estounatorcida.com.br
       </span>
     </div>
   );

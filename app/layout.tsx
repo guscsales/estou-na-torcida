@@ -1,4 +1,5 @@
 import 'thon-ui/core/base.css';
+import Header from './components/header';
 
 export default function RootLayout({
   children,
@@ -10,8 +11,12 @@ export default function RootLayout({
       <head>
         <title>Apoie a Seleção Brasileira nessa Copa do Mundo!</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width" />
       </head>
-      <body>{children}</body>
+      <body>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }

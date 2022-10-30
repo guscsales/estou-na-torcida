@@ -2734,10 +2734,10 @@ text-table@^0.2.0:
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==
 
-thon-ui@0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/thon-ui/-/thon-ui-0.0.6.tgz#24c9d84a75d991cfa3b8258b13829c1491249bde"
-  integrity sha512-GjSIqwI1P/TMWaEPMsx0mN7cxUiC5w3HjpC3sFewI9Q1pOc4mtFt4zu1cjc8eLzIbUpNUzED7fCwsteJrNpu5A==
+thon-ui@0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/thon-ui/-/thon-ui-0.0.7.tgz#1873fda06dc02662ca66dec0e2163a9b5ee7f1e7"
+  integrity sha512-7VBpyhoe0YbqxDPB4KZVmY3NGyYLhStrVrOJ0QxIG/sQhsy+FJ+05LBweRbVa1h7H9cj+snxR0b5HOLyRZ4+uw==
   dependencies:
     autoprefixer "^10.4.12"
     classnames "^2.3.2"

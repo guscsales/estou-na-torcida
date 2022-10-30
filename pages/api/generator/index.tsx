@@ -13,11 +13,7 @@ const fontItalic = fetch(
   new URL('../../../assets/og/fonts/Poppins-BoldItalic.ttf', import.meta.url)
 ).then((res) => res.arrayBuffer());
 
-const wideCardComponent = (
-  firstName: string,
-  lastName: string,
-  pic: string
-) => (
+const wideCardComponent = (name: string, pic: string) => (
   <div
     style={{
       backgroundImage: `url(http://localhost:3000/images/players/neymar-twitter.png)`,
@@ -38,7 +34,7 @@ const wideCardComponent = (
         <img
           src={pic}
           tw="flex h-[72px] rounded-full"
-          alt={`Foto de ${firstName}`}
+          alt={`Foto de ${name}`}
         />
       </div>
       <div tw="flex flex-col w-[270px] ml-2">
@@ -49,7 +45,7 @@ const wideCardComponent = (
               'drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));',
           }}
         >
-          {firstName} {lastName}
+          {name}
         </span>
         <span
           tw="text-lg text-amber-300"
@@ -102,10 +98,6 @@ export default async function handler(req: NextApiRequest) {
 
   pic = decodeURIComponent(pic);
 
-  const nameSplit = name.split(' ');
-  const [firstName] = nameSplit;
-  const lastName = nameSplit[nameSplit.length - 1];
-
   const fontData = await font;
   const fontItalicData = await fontItalic;
 
@@ -116,7 +108,7 @@ export default async function handler(req: NextApiRequest) {
     };
   } = {
     wide: {
-      component: wideCardComponent(firstName, lastName, pic),
+      component: wideCardComponent(name, pic),
       settings: {
         width: 1200,
         height: 628,
