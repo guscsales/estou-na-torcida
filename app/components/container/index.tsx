@@ -10,7 +10,7 @@ export default function Container({
   ...props
 }: Props & React.HTMLAttributes<HTMLElement>) {
   const className = classNames(
-    'w-full sm:w-[1400px] px-2 sm:px-4 sm:mx-auto',
+    'w-full xl:w-[1200px] 2xl:w-[1400px] px-2 lg:px-4 lg:mx-auto',
     props.className
   );
 

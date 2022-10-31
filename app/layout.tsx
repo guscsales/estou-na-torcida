@@ -13,7 +13,7 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width" />
       </head>
-      <body>
+      <body className="overflow-x-hidden">
         <Header />
         {children}
       </body>

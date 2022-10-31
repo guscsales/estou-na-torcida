@@ -7,7 +7,7 @@ const fontItalic = Poppins({ weight: '700', style: 'italic' });
 
 export default function WideCard(props: React.HTMLAttributes<HTMLElement>) {
   const className = classNames(
-    `${font.className} scale-[.3] sm:scale-50 w-[1200px] h-[628px] bg-no-repeat bg-bottom flex flex-col justify-end pb-7 pl-14`,
+    `${font.className} scale-[.25] sm:scale-[.3] lg:scale-[.4] 2xl:scale-50 w-[1200px] h-[628px] bg-no-repeat bg-bottom flex flex-col justify-end pb-7 pl-14`,
     props.className
   );
 
