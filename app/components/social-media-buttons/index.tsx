@@ -54,7 +54,7 @@ export default function SocialMediaAuth() {
   }
 
   return (
-    <div className="flex gap-2">
+    <>
       <Button
         variant="custom"
         className="bg-blue-400 hover:bg-blue-400/[.9] active:bg-blue-400/[.8]"
@@ -79,6 +79,6 @@ export default function SocialMediaAuth() {
       >
         Entrar com Google
       </Button>
-    </div>
+    </>
   );
 }

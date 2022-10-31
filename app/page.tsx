@@ -1,5 +1,5 @@
 import HeroSection from './components/hero-section';
-import SocialMediaAuth from './components/social-media-auth';
+import SocialMediaSection from './components/social-media-section';
 import { Text } from 'thon-ui';
 
 export default function Home() {
@@ -13,7 +13,7 @@ export default function Home() {
       >
         Apenas 3 passos até seu sticker!
       </Text>
-      {/* <SocialMediaAuth /> */}
+      <SocialMediaSection />
     </>
   );
 }

@@ -1,4 +1,5 @@
 import 'thon-ui/core/base.css';
+import Footer from './components/footer';
 import Header from './components/header';
 
 export default function RootLayout({
@@ -16,6 +17,7 @@ export default function RootLayout({
       <body className="overflow-x-hidden">
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
