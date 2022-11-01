@@ -36,8 +36,6 @@ export default function ShareSection() {
     });
     const shareData = {
       files: [file],
-      title: 'Estou Na Torcida',
-      text: 'Obrigado Pelo Apoio!',
     };
 
     if (navigator.canShare && navigator.canShare(shareData)) {
