@@ -8,9 +8,14 @@ import {
   TwitterAuthProvider,
   signInWithPopup,
 } from 'firebase/auth';
+import React from 'react';
 import { Button } from 'thon-ui';
+import { StickerDataContext } from '../../providers/sticker-data-providers/index';
+import { User } from '../../shared/models/user';
 
 export default function SocialMediaAuth() {
+  const { setStickerData } = React.useContext(StickerDataContext);
+
   async function handleTwitterAuth() {
     const auth = getAuth();
     auth.useDeviceLanguage();
@@ -19,12 +24,12 @@ export default function SocialMediaAuth() {
 
     const { user: twitterUser } = await signInWithPopup(auth, provider);
 
-    const user = {
-      ...twitterUser,
-      photoURL: twitterUser.photoURL?.replace('_normal', '_400x400'),
+    const user: User = {
+      name: twitterUser.displayName || '',
+      pictureURL: twitterUser.photoURL?.replace('_normal', '_400x400') || '',
     };
 
-    console.log(user);
+    setStickerData((prevValue) => ({ ...prevValue, user }));
   }
 
   async function handleFacebookAuth() {
@@ -37,9 +42,14 @@ export default function SocialMediaAuth() {
     });
     provider.addScope('public_profile');
 
-    const { user } = await signInWithPopup(auth, provider);
+    const { user: facebookUser } = await signInWithPopup(auth, provider);
 
-    console.log(user);
+    const user: User = {
+      name: facebookUser.displayName || '',
+      pictureURL: facebookUser.photoURL || '',
+    };
+
+    setStickerData((prevValue) => ({ ...prevValue, user }));
   }
 
   async function handleGoogleAuth() {
@@ -48,9 +58,14 @@ export default function SocialMediaAuth() {
 
     const provider = new GoogleAuthProvider();
 
-    const { user } = await signInWithPopup(auth, provider);
+    const { user: googleUser } = await signInWithPopup(auth, provider);
 
-    console.log(user);
+    const user: User = {
+      name: googleUser.displayName || '',
+      pictureURL: googleUser.photoURL || '',
+    };
+
+    setStickerData((prevValue) => ({ ...prevValue, user }));
   }
 
   return (

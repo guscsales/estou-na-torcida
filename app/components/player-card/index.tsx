@@ -11,6 +11,7 @@ type Props = {
 export default function PlayerCard({
   player,
   active,
+  ...props
 }: Props & React.HTMLAttributes<HTMLElement>) {
   const nameClassName = classNames(
     `w-full py-1.5 px-3.5 rounded-xl relative
@@ -38,6 +39,7 @@ export default function PlayerCard({
     <button
       className="group flex items-end w-full h-32"
       aria-label={`Escolher o jogador ${player.name}`}
+      {...props}
     >
       <div className={nameClassName}>
         <Text as="div" variant="sm" className={textClassName}>

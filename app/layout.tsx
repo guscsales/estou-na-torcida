@@ -1,6 +1,7 @@
 import 'thon-ui/core/base.css';
 import Footer from './components/footer';
 import Header from './components/header';
+import StickerDataProvider from './providers/sticker-data-providers';
 
 export default function RootLayout({
   children,
@@ -16,7 +17,7 @@ export default function RootLayout({
       </head>
       <body className="overflow-x-hidden">
         <Header />
-        {children}
+        <StickerDataProvider>{children}</StickerDataProvider>
         <Footer />
       </body>
     </html>

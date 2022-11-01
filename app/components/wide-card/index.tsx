@@ -4,13 +4,14 @@ import classNames from 'classnames';
 import { Player } from '../../shared/models/player';
 import { User } from '../../shared/models/user';
 import { SupportPhrase } from '../../shared/models/support-phrase';
+import Image from 'next/image';
 
 const font = Poppins({ weight: '700' });
 const fontItalic = Poppins({ weight: '700', style: 'italic' });
 
 type Props = {
   player: Player;
-  user: User;
+  user?: User;
   supportPhrase: SupportPhrase;
 };
 
@@ -34,29 +35,39 @@ export default function WideCard({
       className={className}
     >
       <div className="w-[134px] h-[32px] bg-no-repeat bg-[url(/images/fifa-qatar-logo.png)]" />
-      <div className="flex gap-2 items-center mt-20">
-        <div className="rounded-full w-20 h-20 border-2 border-solid border-white p-0.5 overflow-hidden">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={user.pictureURL}
-            className="flex rounded-full"
-            alt={`Foto de ${user.name}`}
-          />
-        </div>
-        <div className="flex flex-col w-[270px]">
+      <div className="flex gap-2 items-center mt-20 h-[88px]">
+        {user && (
+          <div className="rounded-full w-20 h-20 border-2 border-solid border-white p-0.5 overflow-hidden">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <Image
+              src={user?.pictureURL || '/images/default-avatar.png'}
+              className="flex rounded-full"
+              alt={`Foto de ${user?.name ? user.name : 'um avatar padrão'}`}
+              referrerPolicy="no-referrer"
+              width={80}
+              height={80}
+            />
+          </div>
+        )}
+        <div className="flex flex-col w-[400px]">
           <span className="text-2xl drop-shadow-md text-white">
-            {user.name}
+            {user?.name || ''}
           </span>
           <span
             className={`${fontItalic.className} text-lg text-amber-300 drop-shadow-md`}
           >
-            #EstouNaTorcida pela Seleção Braseileira no Catar
+            #EstouNaTorcida pela
+            <br />
+            Seleção Braseileira no Catar
           </span>
         </div>
       </div>
-      <h1 className="text-white text-8xl w-8/12 my-7 drop-shadow-green">
-        {supportPhrase.phrase}
-      </h1>
+      <h1
+        className="text-white text-8xl w-full pr-12 my-7 drop-shadow-green h-48 flex items-center"
+        dangerouslySetInnerHTML={{
+          __html: supportPhrase.phrase,
+        }}
+      />
       <span
         className={`${fontItalic.className} text-lg text-amber-300 drop-shadow-md`}
       >

@@ -1,6 +1,8 @@
 import { Button, Text } from 'thon-ui';
 import Container from '../container';
 import WideCard from '../wide-card';
+import { phrases } from '../../shared/data/phrases';
+import { players } from 'app/shared/data/players';
 
 export default function HeroSection() {
   return (
@@ -53,14 +55,12 @@ export default function HeroSection() {
         </div>
         <WideCard
           className="absolute left-[50%] top-[-190px] ml-[-600px] sm:ml-auto sm:top-[-200px] sm:right-[-400px] lg:right-[-320px] 2xl:right-[-260px] z-20"
-          player={{ id: 'neymar-jr', name: 'Neymar Jr' }}
+          player={players[0]}
           user={{
-            id: '',
-            email: '',
             name: 'Gustavo Sales',
             pictureURL: '/images/gus.jpeg',
           }}
-          supportPhrase={{ id: '', phrase: 'Vai Brasil! Rumo ao Hexa!' }}
+          supportPhrase={phrases[0]}
         />
       </div>
     </Container>

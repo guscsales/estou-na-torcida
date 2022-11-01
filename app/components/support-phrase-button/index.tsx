@@ -10,13 +10,14 @@ type Props = {
 export default function SupportPhraseButton({
   supportPhrase,
   active,
+  ...props
 }: Props & React.HTMLAttributes<HTMLElement>) {
   const nameClassName = classNames(
     `w-full py-3.5 px-4 rounded-xl relative
-    border-solid border-3 border-transparent
+    border-solid border-3 h-20 flex items-center
     transition-all duration-200 ease-in-out`,
     {
-      'bg-gray-200 group-hover:bg-gray-300': !active,
+      'bg-gray-200 group-hover:bg-gray-300 border-transparent': !active,
       'bg-gray-700 border-amber-500': active,
     }
   );
@@ -31,12 +32,13 @@ export default function SupportPhraseButton({
 
   return (
     <button
-      className="group  w-full"
+      className="group w-full"
       aria-label={`Escolher a frase "${supportPhrase.phrase}"`}
+      {...props}
     >
       <div className={nameClassName}>
         <Text as="div" variant="sm" className={textClassName}>
-          {supportPhrase.phrase}
+          <span dangerouslySetInnerHTML={{ __html: supportPhrase.phrase }} />
         </Text>
       </div>
     </button>

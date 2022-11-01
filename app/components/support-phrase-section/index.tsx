@@ -1,10 +1,22 @@
+'use client';
+
+import React from 'react';
 import Container from '../container/index';
 import { Text } from 'thon-ui';
 import SupportPhraseButton from '../support-phrase-button';
+import { SupportPhrase } from '../../shared/models/support-phrase';
+import { StickerDataContext } from '../../providers/sticker-data-providers/index';
+import { phrases } from '../../shared/data/phrases';
 
 export default function SupportPhraseSection() {
+  const { stickerData, setStickerData } = React.useContext(StickerDataContext);
+
+  function handleSelectPhrase(phrase: SupportPhrase) {
+    setStickerData((prevValue) => ({ ...prevValue, phrase }));
+  }
+
   return (
-    <Container className="grid sm:grid-cols-[350px_1fr] lg:grid-cols-[480px_1fr] gap-4 xl:gap-20">
+    <Container className="grid sm:grid-cols-[350px_1fr] lg:grid-cols-[480px_1fr] gap-4 xl:gap-20 relative z-30">
       <header>
         <Text
           as="h2"
@@ -20,25 +32,14 @@ export default function SupportPhraseSection() {
       </header>
       <div>
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2">
-          <SupportPhraseButton
-            supportPhrase={{ id: '1', phrase: 'Vai Brasil! Rumo Ao Hexa!' }}
-            active
-          />
-          <SupportPhraseButton
-            supportPhrase={{ id: '1', phrase: 'Vai Brasil! Rumo Ao Hexa!' }}
-          />
-          <SupportPhraseButton
-            supportPhrase={{ id: '1', phrase: 'Vai Brasil! Rumo Ao Hexa!' }}
-          />
-          <SupportPhraseButton
-            supportPhrase={{ id: '1', phrase: 'Vai Brasil! Rumo Ao Hexa!' }}
-          />
-          <SupportPhraseButton
-            supportPhrase={{ id: '1', phrase: 'Vai Brasil! Rumo Ao Hexa!' }}
-          />
-          <SupportPhraseButton
-            supportPhrase={{ id: '1', phrase: 'Vai Brasil! Rumo Ao Hexa!' }}
-          />
+          {phrases.map((phrase) => (
+            <SupportPhraseButton
+              key={phrase.id}
+              supportPhrase={phrase}
+              active={phrase.id === stickerData.phrase.id}
+              onClick={() => handleSelectPhrase(phrase)}
+            />
+          ))}
         </div>
       </div>
     </Container>

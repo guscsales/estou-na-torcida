@@ -1,5 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { ImageResponse } from '@vercel/og';
+import { User } from '../../../app/shared/models/user';
+import { phrases } from '../../../app/shared/data/phrases';
 
 export const config = {
   runtime: 'experimental-edge',
@@ -13,90 +15,113 @@ const fontItalic = fetch(
   new URL('../../../assets/og/fonts/Poppins-BoldItalic.ttf', import.meta.url)
 ).then((res) => res.arrayBuffer());
 
-const wideCardComponent = (name: string, pic: string) => (
-  <div
-    style={{
-      backgroundImage: `url(http://localhost:3000/images/players/neymar-twitter.png)`,
-      backgroundRepeat: 'no-repeat',
-      fontFamily: '"Sans"',
-    }}
-    tw={`w-[1200px] h-[628px] bg-black flex flex-col justify-end pb-7 pl-14`}
-  >
-    <div
-      style={{
-        backgroundImage: `url(http://localhost:3000/images/fifa-qatar-logo.png)`,
-      }}
-      tw="w-[134px] h-[32px]"
-    />
-    <div tw="flex items-center mt-20">
-      <div tw="flex rounded-full w-20 h-20 border-2 border-solid border-white p-0.5 overflow-hidden">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={pic}
-          tw="flex h-[72px] rounded-full"
-          alt={`Foto de ${name}`}
-        />
-      </div>
-      <div tw="flex flex-col w-[270px] ml-2">
-        <span
-          tw="text-2xl text-white"
-          style={{
-            filter:
-              'drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));',
-          }}
-        >
-          {name}
-        </span>
-        <span
-          tw="text-lg text-amber-300"
-          style={{
-            fontFamily: '"SansItalic"',
-            lineHeight: '104%',
-            filter:
-              'drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));',
-          }}
-        >
-          #EstouNaTorcida pela Seleção Braseileira no Catar
-        </span>
-      </div>
-    </div>
-    <h1
-      tw="text-white text-8xl w-8/12 mt-6"
-      style={{ textShadow: '2px 2px 1px #047857', lineHeight: '95%' }}
-    >
-      Vai Brasil! Rumo ao Hexa!
-    </h1>
-    <span
-      tw="text-lg text-amber-300"
-      style={{
-        filter:
-          'drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));',
-        fontFamily: '"SansItalic"',
-      }}
-    >
-      Apoie também em estounatorcida.com.br
-    </span>
-  </div>
-);
-
 type Params = {
   type: 'wide' | 'square' | 'stories';
+  user: User;
+  playerId: string;
+  phraseId: string;
+};
+
+const wideCardComponent = ({ user, playerId, phraseId }: Params) => {
+  const phrase = phrases
+    .find((phrase) => phrase.id === phraseId)
+    ?.phrase.split('<br />');
+
+  return (
+    <div
+      style={{
+        backgroundImage: `url(${process.env.DOMAIN}/images/players/${playerId}-twitter.png)`,
+        backgroundRepeat: 'no-repeat',
+        fontFamily: '"Sans"',
+      }}
+      tw={`w-[1200px] h-[628px] bg-black flex flex-col justify-end pb-7 pl-14`}
+    >
+      <div
+        style={{
+          backgroundImage: `url(${process.env.DOMAIN}/images/fifa-qatar-logo.png)`,
+        }}
+        tw="w-[134px] h-[32px]"
+      />
+      <div tw="flex items-center mt-20 h-[88px]">
+        {user.name && (
+          <div tw="flex rounded-full w-20 h-20 border-2 border-solid border-white p-0.5 overflow-hidden">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={
+                user.pictureURL ||
+                `${process.env.DOMAIN}/images/default-avatar.png`
+              }
+              tw="flex h-[72px] rounded-full"
+              alt=""
+              referrerPolicy="no-referrer"
+            />
+          </div>
+        )}
+        <div tw="flex flex-col w-[400px] ml-2">
+          <span
+            tw="text-2xl text-white"
+            style={{
+              filter:
+                'drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));',
+            }}
+          >
+            {user.name || ''}
+          </span>
+          <span
+            tw="text-lg text-amber-300 flex flex-col"
+            style={{
+              fontFamily: '"SansItalic"',
+              lineHeight: '104%',
+              filter:
+                'drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));',
+            }}
+          >
+            <div>#EstouNaTorcida pela</div>
+            <div>Seleção Braseileira no Catar</div>
+          </span>
+        </div>
+      </div>
+      <h1
+        tw="text-white text-8xl w-full pr-12 mt-6 flex flex-col h-48 justify-center"
+        style={{ textShadow: '2px 2px 1px #047857', lineHeight: '95%' }}
+      >
+        {phrase?.map((value) => (
+          <div key={value}>{value}</div>
+        ))}
+      </h1>
+      <span
+        tw="text-lg text-amber-300"
+        style={{
+          filter:
+            'drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));',
+          fontFamily: '"SansItalic"',
+        }}
+      >
+        Apoie também em estounatorcida.com.br
+      </span>
+    </div>
+  );
 };
 
 export default async function handler(req: NextApiRequest) {
   const { searchParams } = new URL(req.url as string);
 
-  const type = searchParams.get('type') as Params['type'];
-  const name = searchParams.get('name');
-  let pic = searchParams.get('pic');
+  const params = {
+    type: searchParams.get('type') as Params['type'],
+    user: {
+      name: searchParams.get('name'),
+      pictureURL: decodeURIComponent(searchParams.get('pictureURL') || ''),
+    },
+    playerId: searchParams.get('playerId'),
+    phraseId: searchParams.get('phraseId'),
+  } as Params;
 
-  if (!name || !pic || !type) {
-    return new Response(null, {
-      status: 404,
-    });
-  }
-
-  pic = decodeURIComponent(pic);
+  // TODO: use schema validator here
+  // if (!params.name || !params.pic || !params.type) {
+  //   return new Response(null, {
+  //     status: 404,
+  //   });
+  // }
 
   const fontData = await font;
   const fontItalicData = await fontItalic;
@@ -108,7 +133,7 @@ export default async function handler(req: NextApiRequest) {
     };
   } = {
     wide: {
-      component: wideCardComponent(name, pic),
+      component: wideCardComponent(params),
       settings: {
         width: 1200,
         height: 628,
@@ -130,8 +155,8 @@ export default async function handler(req: NextApiRequest) {
     },
   };
 
-  return new ImageResponse(cards[type].component, {
-    ...cards[type].settings,
+  return new ImageResponse(cards[params.type].component, {
+    ...cards[params.type].settings,
     fonts: [
       {
         name: 'Sans',
