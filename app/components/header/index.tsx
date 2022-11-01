@@ -3,7 +3,7 @@ import Logo from '../logo';
 
 export default function Header() {
   return (
-    <header className="flex justify-center sm:justify-between items-center px-2 sm:px-4 py-1 sm:py-2 relative z-30">
+    <header className="flex justify-center sm:justify-between items-center px-2 sm:px-4 pb-1 pt-4 sm:py-2 relative z-30">
       <Logo />
       <Button
         as="a"

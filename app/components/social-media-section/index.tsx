@@ -25,12 +25,16 @@ export default function SocialMediaSection() {
         </Text>
       </header>
       <div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 lg:flex-row gap-2 sm:justify-self-center sm:w-[260px] lg:w-full lg:justify-end">
+        <div className="grid grid-cols-1 lg:grid-cols-3 lg:flex-row gap-2 sm:mx-auto sm:w-[260px] lg:w-full lg:justify-end">
           <SocialMediaAuth />
         </div>
         {stickerData.user && (
           <div className="py-3 px-5 bg-emerald-900/[.8] rounded-lg mt-3">
-            <Text variant="base" className="text-gray-50">
+            <Text
+              as="div"
+              variant="base"
+              className="text-gray-50 text-center sm:text-left"
+            >
               {stickerData.user?.name.split(' ')[0]} deu tudo certo com a
               conexão. Continue nos próximos passos.
             </Text>
