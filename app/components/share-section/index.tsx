@@ -17,6 +17,7 @@ export default function ShareSection() {
       ...stickerData.user,
       playerId: stickerData.player.id,
       phraseId: stickerData.phrase.id,
+      ts: new Date().getTime(),
     });
 
     const generatorAPI = `/api/generator?${params}`;
