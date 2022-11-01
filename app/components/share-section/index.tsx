@@ -9,6 +9,34 @@ import { StickerDataContext } from '../../providers/sticker-data-providers/index
 export default function ShareSection() {
   const { stickerData } = React.useContext(StickerDataContext);
 
+  async function handleShareWide() {
+    const generatorAPI = `/api/generator?type=wide&name=Gustavo%20Sales&pictureURL=https%3A%2F%2Fca.slack-edge.com%2FT0259JYFTTK-U02L9EWAA10-2f5925353804-512&playerId=neymar-jr&phraseId=1`;
+    const response = await fetch(generatorAPI);
+    const blob = await response.blob();
+    const filesArray = [
+      new File([blob], 'test.png', {
+        type: 'image/png',
+        lastModified: new Date().getTime(),
+      }),
+    ];
+    const shareData = {
+      files: filesArray,
+    };
+
+    if (navigator.canShare && navigator.canShare(shareData)) {
+      navigator.share(shareData);
+    } else {
+      var link = document.createElement('a');
+      link.setAttribute('download', 'download.png');
+      link.href = generatorAPI;
+
+      document.body.appendChild(link);
+
+      link.click();
+      link.remove();
+    }
+  }
+
   return (
     <Container className="grid sm:grid-cols-[350px_1fr] lg:grid-cols-[480px_1fr] gap-4 xl:gap-20 items-center">
       <header className="self-start">
@@ -60,7 +88,14 @@ export default function ShareSection() {
         <div className="flex flex-col gap-3 mt-4 sm:w-9/12 lg:w-8/12">
           <Button variant="primary">Compartilhar no Feed</Button>
           <Button variant="primary">Compartilhar nos Stories</Button>
-          <Button variant="primary">Fazer Download</Button>
+          <Button
+            variant="primary"
+            onClick={() => {
+              handleShareWide();
+            }}
+          >
+            Fazer Download
+          </Button>
         </div>
       </header>
       <div className="relative h-[240px] hidden sm:block">
