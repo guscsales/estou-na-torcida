@@ -38,11 +38,11 @@ export default function ShareSection() {
       files: [],
     };
 
+    navigator
+      .share(shareData)
+      .then(() => console.log('Share was successful.'))
+      .catch((error) => console.log('Sharing failed', error));
     if (navigator.canShare && navigator.canShare(shareData)) {
-      navigator
-        .share(shareData)
-        .then(() => console.log('Share was successful.'))
-        .catch((error) => console.log('Sharing failed', error));
     } else {
       var link = document.createElement('a');
       // link.setAttribute('download', imageName);
