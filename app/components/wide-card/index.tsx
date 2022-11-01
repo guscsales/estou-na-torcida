@@ -30,7 +30,7 @@ export default function WideCard({
     <div
       style={{
         display: 'flex',
-        backgroundImage: `url(/images/players/${player.id}-twitter.png)`,
+        backgroundImage: `url(/images/players/${player.id}-wide.png)`,
       }}
       className={className}
     >
