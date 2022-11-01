@@ -11,15 +11,12 @@ export default function ShareSection() {
   const { stickerData } = React.useContext(StickerDataContext);
 
   async function handleShareWide() {
-    const params = qs.stringify(
-      {
-        type: 'wide',
-        ...stickerData.user,
-        playerId: stickerData.player.id,
-        phraseId: stickerData.phrase.id,
-      },
-      {}
-    );
+    const params = qs.stringify({
+      type: 'wide',
+      ...stickerData.user,
+      playerId: stickerData.player.id,
+      phraseId: stickerData.phrase.id,
+    });
 
     const generatorAPI = `/api/generator?${params}`;
 

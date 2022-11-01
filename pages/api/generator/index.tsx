@@ -18,12 +18,18 @@ const fontItalic = fetch(
 
 type Params = {
   type: 'wide' | 'square' | 'stories';
-  user: User;
+  name: string;
+  pictureURL: string;
   playerId: string;
   phraseId: string;
 };
 
-const wideCardComponent = ({ user, playerId, phraseId }: Params) => {
+const wideCardComponent = ({
+  name,
+  pictureURL,
+  playerId,
+  phraseId,
+}: Params) => {
   const phrase = phrases
     .find((phrase) => phrase.id === phraseId)
     ?.phrase.split('<br />');
@@ -44,13 +50,12 @@ const wideCardComponent = ({ user, playerId, phraseId }: Params) => {
         tw="w-[134px] h-[32px]"
       />
       <div tw="flex items-center mt-20 h-[88px]">
-        {user && (
+        {name && (
           <div tw="flex rounded-full w-20 h-20 border-2 border-solid border-white p-0.5 overflow-hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={
-                user.pictureURL ||
-                `${process.env.DOMAIN}/images/default-avatar.png`
+                pictureURL || `${process.env.DOMAIN}/images/default-avatar.png`
               }
               tw="flex h-[72px] rounded-full"
               alt=""
@@ -66,7 +71,7 @@ const wideCardComponent = ({ user, playerId, phraseId }: Params) => {
                 'drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));',
             }}
           >
-            {user?.name || ''}
+            {name || ''}
           </span>
           <span
             tw="text-lg text-amber-300 flex flex-col"
@@ -111,7 +116,9 @@ function parseQuery(queryString: string) {
   ).split('&');
   for (var i = 0; i < pairs.length; i++) {
     var pair = pairs[i].split('=');
-    query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
+    query[decodeURIComponent(pair[0])] = decodeURIComponent(
+      pair[1] || ''
+    ).replaceAll('+', ' ');
   }
   return query;
 }
