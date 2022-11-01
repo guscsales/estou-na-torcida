@@ -14,7 +14,7 @@ export default function ShareSection() {
     const response = await fetch(generatorAPI);
     const blob = await response.blob();
     const filesArray = [
-      new File([blob], 'test.png', {
+      new File([blob], 'gustavo-sales-sticker.png', {
         type: 'image/png',
         lastModified: new Date().getTime(),
       }),

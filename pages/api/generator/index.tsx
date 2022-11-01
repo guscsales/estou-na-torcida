@@ -104,6 +104,8 @@ const wideCardComponent = ({ user, playerId, phraseId }: Params) => {
 };
 
 export default async function handler(req: NextApiRequest) {
+  console.log(req.url);
+
   const { searchParams } = new URL(req.url as string);
 
   const params = {
