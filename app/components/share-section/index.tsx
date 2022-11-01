@@ -44,7 +44,7 @@ export default function ShareSection() {
     };
 
     if (navigator.canShare && navigator.canShare(shareData)) {
-      navigator.share(shareData);
+      await navigator.share(shareData);
     } else {
       var link = document.createElement('a');
       link.setAttribute('download', imageName);
