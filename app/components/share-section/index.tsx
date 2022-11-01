@@ -31,18 +31,20 @@ export default function ShareSection() {
     const response = await fetch(generatorAPI);
     const blob = await response.blob();
     const imageName = `estou-na-torcida-${type}.png`;
-    const filesArray = [
-      new File([blob], imageName, {
-        type: 'image/png',
-        lastModified: new Date().getTime(),
-      }),
-    ];
+    const file = new File([blob], imageName, {
+      type: blob.type,
+    });
     const shareData = {
-      files: filesArray,
+      files: [file],
+      title: 'Estou Na Torcida',
+      text: 'Obrigado Pelo Apoio!',
     };
 
     if (navigator.canShare && navigator.canShare(shareData)) {
-      navigator.share(shareData);
+      navigator
+        .share(shareData)
+        .then(() => console.log('Share was successful.'))
+        .catch((error) => console.log('Sharing failed', error));
     } else {
       var link = document.createElement('a');
       link.setAttribute('download', imageName);
