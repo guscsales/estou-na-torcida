@@ -15,7 +15,7 @@ export default function WideCard(props: React.HTMLAttributes<HTMLElement>) {
     <div
       style={{
         display: 'flex',
-        backgroundImage: `url(/images/players/neymar-twitter.png)`,
+        backgroundImage: `url(/images/players/neymar-jr-twitter.png)`,
       }}
       className={className}
     >
@@ -24,7 +24,7 @@ export default function WideCard(props: React.HTMLAttributes<HTMLElement>) {
         <div className="rounded-full w-20 h-20 border-2 border-solid border-white p-0.5 overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="https://ca.slack-edge.com/T0259JYFTTK-U02L9EWAA10-2f5925353804-512"
+            src="/images/gus.jpeg"
             className="flex rounded-full"
             alt="Foto de Gustavo"
           />

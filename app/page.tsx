@@ -1,6 +1,7 @@
 import HeroSection from './components/hero-section';
 import SocialMediaSection from './components/social-media-section';
 import { Text } from 'thon-ui';
+import PlayerSection from './components/player-section';
 
 export default function Home() {
   return (
@@ -13,7 +14,10 @@ export default function Home() {
       >
         Apenas 3 passos até seu sticker!
       </Text>
-      <SocialMediaSection />
+      <article className="grid gap-9 sm:gap-24">
+        <SocialMediaSection />
+        <PlayerSection />
+      </article>
     </>
   );
 }

@@ -4,8 +4,8 @@ import { Text } from 'thon-ui';
 
 export default function SocialMediaSection() {
   return (
-    <Container className="grid sm:grid-cols-[350px_1fr] lg:grid-cols-[455px_1fr] gap-4 items-center">
-      <header>
+    <Container className="grid sm:grid-cols-[350px_1fr] lg:grid-cols-[480px_1fr] gap-4 xl:gap-20 items-center">
+      <header className="self-start">
         <Text
           as="h2"
           variant="3xl sm:4xl lg:5xl"
@@ -13,14 +13,14 @@ export default function SocialMediaSection() {
         >
           Entre com alguma rede social
         </Text>
-        <Text variant="sm sm:base" className="text-gray-500">
+        <Text as="p" variant="sm sm:base" className="text-gray-500 w-10/12">
           Coletaremos algumas informações públicas para gerar seu sticker
           personalizado.
         </Text>
       </header>
-      <article className="flex flex-col lg:flex-row gap-2 sm:justify-self-center sm:w-[260px] lg:w-full lg:justify-end">
+      <div className="grid grid-cols-1 lg:grid-cols-3 lg:flex-row gap-2 sm:justify-self-center sm:w-[260px] lg:w-full lg:justify-end">
         <SocialMediaAuth />
-      </article>
+      </div>
     </Container>
   );
 }
