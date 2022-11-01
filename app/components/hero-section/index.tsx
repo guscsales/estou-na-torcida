@@ -24,7 +24,12 @@ export default function HeroSection() {
           torcedor nas suas redes sociais!
         </Text>
 
-        <Button variant="primary" className="w-full sm:w-auto mt-12">
+        <Button
+          as="a"
+          href="#go-to-sticker"
+          variant="primary"
+          className="w-full sm:w-7/12 xl:w-5/12 mt-12"
+        >
           Criar meu Sticker
         </Button>
       </div>
