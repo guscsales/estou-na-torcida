@@ -37,7 +37,7 @@ export default function PlayerCard({
 
   return (
     <button
-      className="group flex items-end w-full h-32"
+      className="group flex items-end w-full h-36 rounded-xl overflow-hidden"
       aria-label={`Escolher o jogador ${player.name}`}
       {...props}
     >
@@ -50,7 +50,7 @@ export default function PlayerCard({
           width={149}
           height={132}
           alt={`Foto do ${player.name}`}
-          className="absolute bottom-0 right-0 z-10"
+          className="absolute bottom-0 right-0 z-10 w-auto h-[132px]"
         />
       </div>
     </button>
