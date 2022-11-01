@@ -30,9 +30,7 @@ export default function ShareSection() {
 
     const response = await fetch(generatorAPI);
     const blob = await response.blob();
-    const imageName = `Estou Na Torcida - ${
-      stickerData.player.name
-    } - ${type} - ${format(new Date(), 'dd-MM-yyyy HH-mm-ss')}.png`;
+    const imageName = `estou-na-torcida-${type}.png`;
     const filesArray = [
       new File([blob], imageName, {
         type: 'image/png',
