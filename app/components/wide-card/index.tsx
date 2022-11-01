@@ -1,13 +1,9 @@
-import { Poppins } from '@next/font/google';
 import React from 'react';
 import classNames from 'classnames';
 import { Player } from '../../shared/models/player';
 import { User } from '../../shared/models/user';
 import { SupportPhrase } from '../../shared/models/support-phrase';
 import Image from 'next/image';
-
-const font = Poppins({ weight: '700' });
-const fontItalic = Poppins({ weight: '700', style: 'italic' });
 
 type Props = {
   player: Player;
@@ -22,7 +18,7 @@ export default function WideCard({
   ...props
 }: Props & React.HTMLAttributes<HTMLElement>) {
   const className = classNames(
-    `${font.className} scale-[.25] sm:scale-[.3] lg:scale-[.4] 2xl:scale-50 w-[1200px] h-[628px] bg-no-repeat bg-bottom flex flex-col justify-end pb-7 pl-14`,
+    `scale-[.25] sm:scale-[.3] lg:scale-[.4] 2xl:scale-50 w-[1200px] h-[628px] bg-no-repeat bg-bottom flex flex-col justify-end pb-7 pl-14`,
     props.className
   );
 
@@ -53,9 +49,7 @@ export default function WideCard({
           <span className="text-2xl drop-shadow-md text-white">
             {user?.name || ''}
           </span>
-          <span
-            className={`${fontItalic.className} text-lg text-amber-300 drop-shadow-md`}
-          >
+          <span className={'italic text-lg text-amber-300 drop-shadow-md'}>
             #EstouNaTorcida pela
             <br />
             Seleção Braseileira no Catar
@@ -68,9 +62,7 @@ export default function WideCard({
           __html: supportPhrase.phrase,
         }}
       />
-      <span
-        className={`${fontItalic.className} text-lg text-amber-300 drop-shadow-md`}
-      >
+      <span className={'italic text-lg text-amber-300 drop-shadow-md'}>
         Apoie também em estounatorcida.com.br
       </span>
     </div>
