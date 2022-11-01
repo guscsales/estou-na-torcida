@@ -15,12 +15,14 @@
     "encoding": "^0.1.13",
     "firebase": "^9.13.0",
     "next": "13.0.0",
+    "qs": "^6.11.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "thon-ui": "0.0.7"
   },
   "devDependencies": {
     "@types/node": "18.11.7",
+    "@types/qs": "^6.9.7",
     "@types/react": "18.0.24",
     "@types/react-dom": "18.0.8",
     "autoprefixer": "^10.4.13",

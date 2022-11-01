@@ -5,12 +5,24 @@ import Container from '../container/index';
 import { Button, Text } from 'thon-ui';
 import WideCard from '../wide-card';
 import { StickerDataContext } from '../../providers/sticker-data-providers/index';
+import * as qs from 'qs';
 
 export default function ShareSection() {
   const { stickerData } = React.useContext(StickerDataContext);
 
   async function handleShareWide() {
-    const generatorAPI = `/api/generator?type=wide&name=Gustavo%20Sales&pictureURL=https%3A%2F%2Fca.slack-edge.com%2FT0259JYFTTK-U02L9EWAA10-2f5925353804-512&playerId=neymar-jr&phraseId=1`;
+    const params = qs.stringify(
+      {
+        type: 'wide',
+        ...stickerData.user,
+        playerId: stickerData.player.id,
+        phraseId: stickerData.phrase.id,
+      },
+      {}
+    );
+
+    const generatorAPI = `/api/generator?${params}`;
+
     const response = await fetch(generatorAPI);
     const blob = await response.blob();
     const filesArray = [
@@ -27,7 +39,7 @@ export default function ShareSection() {
       navigator.share(shareData);
     } else {
       var link = document.createElement('a');
-      link.setAttribute('download', 'download.png');
+      link.setAttribute('download', 'gustavo-sales-sticker.png');
       link.href = generatorAPI;
 
       document.body.appendChild(link);

@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { ImageResponse } from '@vercel/og';
 import { User } from '../../../app/shared/models/user';
 import { phrases } from '../../../app/shared/data/phrases';
+import * as qs from 'qs';
 
 export const config = {
   runtime: 'experimental-edge',
@@ -43,7 +44,7 @@ const wideCardComponent = ({ user, playerId, phraseId }: Params) => {
         tw="w-[134px] h-[32px]"
       />
       <div tw="flex items-center mt-20 h-[88px]">
-        {user.name && (
+        {user && (
           <div tw="flex rounded-full w-20 h-20 border-2 border-solid border-white p-0.5 overflow-hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -65,7 +66,7 @@ const wideCardComponent = ({ user, playerId, phraseId }: Params) => {
                 'drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));',
             }}
           >
-            {user.name || ''}
+            {user?.name || ''}
           </span>
           <span
             tw="text-lg text-amber-300 flex flex-col"
@@ -104,19 +105,8 @@ const wideCardComponent = ({ user, playerId, phraseId }: Params) => {
 };
 
 export default async function handler(req: NextApiRequest) {
-  console.log(req.url);
-
-  const { searchParams } = new URL(req.url as string);
-
-  const params = {
-    type: searchParams.get('type') as Params['type'],
-    user: {
-      name: searchParams.get('name'),
-      pictureURL: decodeURIComponent(searchParams.get('pictureURL') || ''),
-    },
-    playerId: searchParams.get('playerId'),
-    phraseId: searchParams.get('phraseId'),
-  } as Params;
+  const [, queryString] = (req.url || '').split('?');
+  const params = qs.parse(queryString) as unknown as Params;
 
   // TODO: use schema validator here
   // if (!params.name || !params.pic || !params.type) {
