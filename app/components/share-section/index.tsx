@@ -11,7 +11,13 @@ import { format } from 'date-fns';
 export default function ShareSection() {
   const { stickerData } = React.useContext(StickerDataContext);
 
+  const [loading, setLoading] = React.useState<
+    'wide' | 'feed' | 'story' | null
+  >(null);
+
   async function handleShareWide() {
+    setLoading('wide');
+
     const params = qs.stringify({
       type: 'wide',
       ...stickerData.user,
@@ -50,6 +56,8 @@ export default function ShareSection() {
       link.click();
       link.remove();
     }
+
+    setLoading(null);
   }
 
   return (
@@ -108,6 +116,7 @@ export default function ShareSection() {
             onClick={() => {
               handleShareWide();
             }}
+            loading={loading == 'wide'}
           >
             Fazer Download
           </Button>
