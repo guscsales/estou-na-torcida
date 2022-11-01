@@ -1,31 +1,29 @@
+import Container from '../container/index';
 import { Button, Text } from 'thon-ui';
-import Container from '../container';
 import WideCard from '../wide-card';
 
-export default function HeroSection() {
+export default function ShareSection() {
   return (
-    <Container className="grid sm:grid-cols-[350px_1fr] xl:grid-cols-[560px_1fr] sm:justify-between mt-10 lg:mt-24">
-      <div>
+    <Container className="grid sm:grid-cols-[350px_1fr] lg:grid-cols-[480px_1fr] gap-4 xl:gap-20 items-center">
+      <header className="self-start">
         <Text
-          as="h1"
-          variant="4xl sm:5xl 2xl:6xl"
-          className="text-emerald-700 text-center sm:text-left mb-3"
+          as="h2"
+          variant="3xl sm:4xl lg:5xl"
+          className="text-emerald-700 mb-2"
         >
-          Apoie o Brasil na Copa do Mundo do Catar
+          Compartilhe seu sticker nas redes
         </Text>
-        <Text
-          as="p"
-          variant="base"
-          className="text-gray-500 text-center sm:text-left"
-        >
-          Crie seu sticker personalizado e demonstre todo o seu apoio de
-          torcedor nas suas redes sociais!
+        <Text as="p" variant="sm sm:base" className="text-gray-500 w-10/12">
+          Você tem 3 tipos de stickers, um como esse ao lado outro no formato
+          para feed e outro para stories.
         </Text>
-
-        <Button variant="primary" className="w-full sm:w-auto mt-12">
-          Criar meu Sticker
-        </Button>
-      </div>
+        <div className="flex flex-col gap-2 mt-4 sm:w-9/12 lg:w-8/12">
+          <Button variant="primary">Compartilhar no Feed</Button>
+          <Button variant="primary">Compartilhar nos Stories</Button>
+          <Button variant="primary">Enviar no WhatsApp</Button>
+          <Button variant="primary">Fazer Download</Button>
+        </div>
+      </header>
       <div className="relative h-[240px]">
         <div className="absolute z-20 w-full opacity-50">
           <div

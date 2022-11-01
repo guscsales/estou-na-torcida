@@ -1,11 +1,25 @@
 import { Poppins } from '@next/font/google';
 import React from 'react';
 import classNames from 'classnames';
+import { Player } from '../../players/models/player';
+import { User } from '../../users/models/user';
+import { SupportPhrase } from '../../support-phrase/models/support-phrase';
 
 const font = Poppins({ weight: '700' });
 const fontItalic = Poppins({ weight: '700', style: 'italic' });
 
-export default function WideCard(props: React.HTMLAttributes<HTMLElement>) {
+type Props = {
+  player: Player;
+  user: User;
+  supportPhrase: SupportPhrase;
+};
+
+export default function WideCard({
+  player,
+  user,
+  supportPhrase,
+  ...props
+}: Props & React.HTMLAttributes<HTMLElement>) {
   const className = classNames(
     `${font.className} scale-[.25] sm:scale-[.3] lg:scale-[.4] 2xl:scale-50 w-[1200px] h-[628px] bg-no-repeat bg-bottom flex flex-col justify-end pb-7 pl-14`,
     props.className
@@ -15,7 +29,7 @@ export default function WideCard(props: React.HTMLAttributes<HTMLElement>) {
     <div
       style={{
         display: 'flex',
-        backgroundImage: `url(/images/players/neymar-jr-twitter.png)`,
+        backgroundImage: `url(/images/players/${player.id}-twitter.png)`,
       }}
       className={className}
     >
@@ -24,14 +38,14 @@ export default function WideCard(props: React.HTMLAttributes<HTMLElement>) {
         <div className="rounded-full w-20 h-20 border-2 border-solid border-white p-0.5 overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/images/gus.jpeg"
+            src={user.pictureURL}
             className="flex rounded-full"
-            alt="Foto de Gustavo"
+            alt={`Foto de ${user.name}`}
           />
         </div>
         <div className="flex flex-col w-[270px]">
           <span className="text-2xl drop-shadow-md text-white">
-            Gustavo Sales
+            {user.name}
           </span>
           <span
             className={`${fontItalic.className} text-lg text-amber-300 drop-shadow-md`}
@@ -41,7 +55,7 @@ export default function WideCard(props: React.HTMLAttributes<HTMLElement>) {
         </div>
       </div>
       <h1 className="text-white text-8xl w-8/12 my-7 drop-shadow-green">
-        Vai Brasil! Rumo ao Hexa!
+        {supportPhrase.phrase}
       </h1>
       <span
         className={`${fontItalic.className} text-lg text-amber-300 drop-shadow-md`}

@@ -3,6 +3,7 @@ import SocialMediaSection from './components/social-media-section';
 import { Text } from 'thon-ui';
 import PlayerSection from './components/player-section';
 import SupportPhraseSection from './components/support-phrase-section';
+import ShareSection from './components/share-section';
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
         <SocialMediaSection />
         <PlayerSection />
         <SupportPhraseSection />
+        <ShareSection />
       </article>
     </>
   );
