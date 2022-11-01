@@ -29,7 +29,7 @@ export default function SocialMediaSection() {
           <SocialMediaAuth />
         </div>
         {stickerData.user && (
-          <div className="p-3 bg-emerald-900/[.8] rounded-lg mt-3">
+          <div className="py-3 px-5 bg-emerald-900/[.8] rounded-lg mt-3">
             <Text variant="base" className="text-gray-50">
               {stickerData.user?.name.split(' ')[0]} deu tudo certo com a
               conexão. Continue nos próximos passos.
