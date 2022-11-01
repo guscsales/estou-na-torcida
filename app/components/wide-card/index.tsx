@@ -1,9 +1,9 @@
 import { Poppins } from '@next/font/google';
 import React from 'react';
 import classNames from 'classnames';
-import { Player } from '../../players/models/player';
-import { User } from '../../users/models/user';
-import { SupportPhrase } from '../../support-phrase/models/support-phrase';
+import { Player } from '../../shared/models/player';
+import { User } from '../../shared/models/user';
+import { SupportPhrase } from '../../shared/models/support-phrase';
 
 const font = Poppins({ weight: '700' });
 const fontItalic = Poppins({ weight: '700', style: 'italic' });

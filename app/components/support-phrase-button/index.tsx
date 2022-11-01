@@ -1,4 +1,4 @@
-import { SupportPhrase } from 'app/support-phrase/models/support-phrase';
+import { SupportPhrase } from 'app/shared/models/support-phrase';
 import classNames from 'classnames';
 import { Text } from 'thon-ui';
 

@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import Image from 'next/image';
 import { Text } from 'thon-ui';
-import { Player } from '../../players/models/player';
+import { Player } from '../../shared/models/player';
 
 type Props = {
   player: Player;
