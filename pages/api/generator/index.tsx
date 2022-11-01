@@ -104,9 +104,23 @@ const wideCardComponent = ({ user, playerId, phraseId }: Params) => {
   );
 };
 
+function parseQuery(queryString: string) {
+  var query: any = {};
+  var pairs = (
+    queryString[0] === '?' ? queryString.substr(1) : queryString
+  ).split('&');
+  for (var i = 0; i < pairs.length; i++) {
+    var pair = pairs[i].split('=');
+    query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
+  }
+  return query;
+}
+
 export default async function handler(req: NextApiRequest) {
   const [, queryString] = (req.url || '').split('?');
-  const params = qs.parse(queryString) as unknown as Params;
+  const params = parseQuery(queryString) as unknown as Params;
+
+  console.log(params);
 
   // TODO: use schema validator here
   // if (!params.name || !params.pic || !params.type) {
