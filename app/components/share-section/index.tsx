@@ -17,7 +17,7 @@ export default function ShareSection() {
           Você tem 3 tipos de stickers, um como esse ao lado outro no formato
           para feed e outro para stories.
         </Text>
-        <div className="flex flex-col gap-2 mt-4 sm:w-9/12 lg:w-8/12">
+        <div className="flex flex-col gap-3 mt-4 sm:w-9/12 lg:w-8/12">
           <Button variant="primary">Compartilhar no Feed</Button>
           <Button variant="primary">Compartilhar nos Stories</Button>
           <Button variant="primary">Enviar no WhatsApp</Button>
