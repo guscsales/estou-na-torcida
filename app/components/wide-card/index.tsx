@@ -46,10 +46,12 @@ export default function WideCard({
           </div>
         )}
         <div className="flex flex-col w-[400px]">
-          <span className="text-2xl drop-shadow-md text-white">
+          <span className="text-2xl drop-shadow-md text-white font-bold">
             {user?.name || ''}
           </span>
-          <span className={'italic text-lg text-amber-300 drop-shadow-md'}>
+          <span
+            className={'font-bold italic text-lg text-amber-300 drop-shadow-md'}
+          >
             #EstouNaTorcida pela
             <br />
             Seleção Braseileira no Catar
@@ -57,7 +59,7 @@ export default function WideCard({
         </div>
       </div>
       <h1
-        className="text-white text-8xl w-full pr-12 my-7 drop-shadow-green h-48 flex items-center"
+        className="text-white text-8xl w-full pr-12 my-7 drop-shadow-green h-48 flex items-center font-bold"
         dangerouslySetInnerHTML={{
           __html: supportPhrase.phrase,
         }}
