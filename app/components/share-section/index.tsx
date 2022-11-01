@@ -140,7 +140,7 @@ export default function ShareSection() {
         </div>
 
         {files.length === 0 ? (
-          <div className="flex flex-col gap-3 mt-4 sm:w-9/12 lg:w-8/12">
+          <div className="flex flex-col gap-3 mt-4 sm:w-9/12 lg:w-8/12 relative z-30">
             <Button
               variant="primary"
               onClick={() => {
@@ -153,7 +153,7 @@ export default function ShareSection() {
           </div>
         ) : (
           <>
-            <div className="flex flex-col gap-3 mt-4 sm:w-9/12 lg:w-8/12 xl:hidden">
+            <div className="flex flex-col gap-3 mt-4 sm:w-9/12 lg:w-8/12 xl:hidden relative z-30">
               <Button
                 variant="primary"
                 onClick={() => {
@@ -179,7 +179,7 @@ export default function ShareSection() {
                 Download da Imagem Acima
               </Button>
             </div>
-            <div className="flex-col gap-3 mt-4 sm:w-9/12 lg:w-8/12 hidden xl:flex">
+            <div className="flex-col gap-3 mt-4 sm:w-9/12 lg:w-8/12 hidden xl:flex relative z-30">
               <Button
                 variant="primary"
                 onClick={() => {
