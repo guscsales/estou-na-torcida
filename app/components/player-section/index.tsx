@@ -4,8 +4,8 @@ import PlayerCard from '../player-card';
 
 export default function PlayerSection() {
   return (
-    <Container className="grid sm:grid-cols-[350px_1fr] lg:grid-cols-[480px_1fr] xl:gap-20 items-center">
-      <header className="self-start">
+    <Container className="grid sm:grid-cols-[350px_1fr] lg:grid-cols-[480px_1fr] xl:gap-20">
+      <header>
         <Text
           as="h2"
           variant="3xl sm:4xl lg:5xl"

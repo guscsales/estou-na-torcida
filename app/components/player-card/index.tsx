@@ -26,7 +26,7 @@ export default function PlayerCard({
     }
   );
   const textClassName = classNames(
-    `font-bold w-20 h-11 flex items-center text-center
+    `font-bold w-20 h-11 flex items-center justify-center
      transition-colors duration-200 ease-in-out`,
     {
       'text-gray-800': !active,
@@ -37,7 +37,7 @@ export default function PlayerCard({
   return (
     <button
       className="group flex items-end w-full h-32"
-      aria-label="Escolher Neymar Jr"
+      aria-label={`Escolher o jogador ${player.name}`}
     >
       <div className={nameClassName}>
         <Text as="div" variant="sm" className={textClassName}>

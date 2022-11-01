@@ -2,6 +2,7 @@ import HeroSection from './components/hero-section';
 import SocialMediaSection from './components/social-media-section';
 import { Text } from 'thon-ui';
 import PlayerSection from './components/player-section';
+import SupportPhraseSection from './components/support-phrase-section';
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <article className="grid gap-9 sm:gap-24">
         <SocialMediaSection />
         <PlayerSection />
+        <SupportPhraseSection />
       </article>
     </>
   );
