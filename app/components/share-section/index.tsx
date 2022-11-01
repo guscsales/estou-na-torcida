@@ -26,16 +26,16 @@ export default function ShareSection() {
       ts: new Date().getTime(),
     });
 
-    const generatorAPI = `/api/generator?${params}`;
+    // const generatorAPI = `/api/generator?${params}`;
 
-    const response = await fetch(generatorAPI);
-    const blob = await response.blob();
-    const imageName = `estou-na-torcida-${type}.png`;
-    const file = new File([blob], imageName, {
-      type: blob.type,
-    });
+    // const response = await fetch(generatorAPI);
+    // const blob = await response.blob();
+    // const imageName = `estou-na-torcida-${type}.png`;
+    // const file = new File([blob], imageName, {
+    //   type: blob.type,
+    // });
     const shareData = {
-      files: [file],
+      files: [],
     };
 
     if (navigator.canShare && navigator.canShare(shareData)) {
@@ -45,8 +45,8 @@ export default function ShareSection() {
         .catch((error) => console.log('Sharing failed', error));
     } else {
       var link = document.createElement('a');
-      link.setAttribute('download', imageName);
-      link.href = generatorAPI;
+      // link.setAttribute('download', imageName);
+      // link.href = generatorAPI;
 
       document.body.appendChild(link);
 
