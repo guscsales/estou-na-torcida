@@ -6,55 +6,89 @@ import { Button, Text } from 'thon-ui';
 import WideCard from '../wide-card';
 import { StickerDataContext } from '../../providers/sticker-data-providers/index';
 import * as qs from 'qs';
-import { format } from 'date-fns';
+
+type OgFile = {
+  type: string;
+  imageName: string;
+  file: File;
+  apiGenerator: string;
+};
 
 export default function ShareSection() {
   const { stickerData } = React.useContext(StickerDataContext);
+  const [files, setFiles] = React.useState<OgFile[]>([]);
 
-  const [loading, setLoading] = React.useState<
-    'wide' | 'feed' | 'stories' | null
-  >(null);
+  const [loading, setLoading] = React.useState<boolean>(false);
 
-  async function handleShare(type: 'wide' | 'feed' | 'stories') {
-    setLoading(type);
+  async function handleGenerateFiles() {
+    setLoading(true);
 
-    const params = qs.stringify({
-      type,
-      ...stickerData.user,
-      playerId: stickerData.player.id,
-      phraseId: stickerData.phrase.id,
-      ts: new Date().getTime(),
-    });
+    const generateParams = (type: string) =>
+      qs.stringify({
+        type,
+        ...stickerData.user,
+        playerId: stickerData.player.id,
+        phraseId: stickerData.phrase.id,
+        ts: new Date().getTime(),
+      });
 
-    // const generatorAPI = `/api/generator?${params}`;
+    const types = ['wide', 'feed', 'stories'];
 
-    // const response = await fetch(generatorAPI);
-    // const blob = await response.blob();
-    // const imageName = `estou-na-torcida-${type}.png`;
-    // const file = new File([blob], imageName, {
-    //   type: blob.type,
-    // });
+    const responses = await Promise.all([
+      fetch(`/api/generator?${generateParams(types[0])}`),
+      fetch(`/api/generator?${generateParams(types[1])}`),
+      fetch(`/api/generator?${generateParams(types[2])}`),
+    ]);
+
+    const files = [];
+
+    for (let i = 0; i < responses.length; i++) {
+      const response = responses[i];
+      const type = types[i];
+      const blob = await response.blob();
+      const imageName = `estou-na-torcida-${type}-${Math.random()
+        .toString(36)
+        .slice(2)}.png`;
+      const file = new File([blob], imageName, {
+        type: blob.type,
+      });
+
+      files.push({
+        type,
+        imageName,
+        file,
+        apiGenerator: `/api/generator?${generateParams(type)}`,
+      });
+    }
+
+    setFiles(files);
+    setLoading(false);
+  }
+
+  function handleShare(type: 'wide' | 'feed' | 'stories') {
+    const { imageName, file, apiGenerator } = files.find(
+      (file) => file.type === type
+    ) as OgFile;
+
     const shareData = {
-      files: [],
+      files: [file],
     };
 
-    navigator
-      .share(shareData)
-      .then(() => console.log('Share was successful.'))
-      .catch((error) => console.log('Sharing failed', error));
     if (navigator.canShare && navigator.canShare(shareData)) {
+      navigator
+        .share(shareData)
+        .then(() => console.log('Share was successful.'))
+        .catch((error) => console.log('Sharing failed', error));
     } else {
       var link = document.createElement('a');
-      // link.setAttribute('download', imageName);
-      // link.href = generatorAPI;
+      link.setAttribute('download', imageName);
+      link.href = apiGenerator;
 
       document.body.appendChild(link);
 
       link.click();
       link.remove();
     }
-
-    setLoading(null);
   }
 
   return (
@@ -105,70 +139,74 @@ export default function ShareSection() {
           />
         </div>
 
-        <div className="flex flex-col gap-3 mt-4 sm:w-9/12 lg:w-8/12 xl:hidden">
-          <Button
-            variant="primary"
-            onClick={() => {
-              handleShare('feed');
-            }}
-            loading={loading == 'feed'}
-            locked={loading != null}
-          >
-            Compartilhar no Feed
-          </Button>
-          <Button
-            variant="primary"
-            onClick={() => {
-              handleShare('stories');
-            }}
-            loading={loading == 'stories'}
-            locked={loading != null}
-          >
-            Compartilhar nos Stories
-          </Button>
-          <Button
-            variant="primary"
-            onClick={() => {
-              handleShare('wide');
-            }}
-            loading={loading == 'wide'}
-            locked={loading != null}
-          >
-            Download da Imagem Acima
-          </Button>
-        </div>
-        <div className="flex-col gap-3 mt-4 sm:w-9/12 lg:w-8/12 hidden xl:flex">
-          <Button
-            variant="primary"
-            onClick={() => {
-              handleShare('feed');
-            }}
-            loading={loading == 'feed'}
-            locked={loading != null}
-          >
-            Download Para o Feed
-          </Button>
-          <Button
-            variant="primary"
-            onClick={() => {
-              handleShare('stories');
-            }}
-            loading={loading == 'stories'}
-            locked={loading != null}
-          >
-            Download Para os Stories
-          </Button>
-          <Button
-            variant="primary"
-            onClick={() => {
-              handleShare('wide');
-            }}
-            loading={loading == 'wide'}
-            locked={loading != null}
-          >
-            Download da Imagem Ao Lado
-          </Button>
-        </div>
+        {files.length === 0 ? (
+          <div className="flex flex-col gap-3 mt-4 sm:w-9/12 lg:w-8/12">
+            <Button
+              variant="primary"
+              onClick={() => {
+                handleGenerateFiles();
+              }}
+              loading={loading}
+            >
+              Compartilhar
+            </Button>
+          </div>
+        ) : (
+          <>
+            <div className="flex flex-col gap-3 mt-4 sm:w-9/12 lg:w-8/12 xl:hidden">
+              <Button
+                variant="primary"
+                onClick={() => {
+                  handleShare('feed');
+                }}
+              >
+                Compartilhar no Feed
+              </Button>
+              <Button
+                variant="primary"
+                onClick={() => {
+                  handleShare('stories');
+                }}
+              >
+                Compartilhar nos Stories
+              </Button>
+              <Button
+                variant="primary"
+                onClick={() => {
+                  handleShare('wide');
+                }}
+              >
+                Download da Imagem Acima
+              </Button>
+            </div>
+            <div className="flex-col gap-3 mt-4 sm:w-9/12 lg:w-8/12 hidden xl:flex">
+              <Button
+                variant="primary"
+                onClick={() => {
+                  handleShare('feed');
+                }}
+              >
+                Download Para o Feed
+              </Button>
+              <Button
+                variant="primary"
+                onClick={() => {
+                  handleShare('stories');
+                }}
+              >
+                Download Para os Stories
+              </Button>
+              <Button
+                variant="primary"
+                onClick={() => {
+                  handleShare('wide');
+                }}
+              >
+                Download da Imagem Ao Lado
+              </Button>
+            </div>
+          </>
+        )}
       </header>
       <div className="relative h-[240px] hidden sm:block">
         <div className="absolute z-20 w-full opacity-50">
