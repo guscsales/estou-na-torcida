@@ -127,8 +127,6 @@ export default async function handler(req: NextApiRequest) {
   const [, queryString] = (req.url || '').split('?');
   const params = parseQuery(queryString) as unknown as Params;
 
-  console.log(params);
-
   // TODO: use schema validator here
   // if (!params.name || !params.pic || !params.type) {
   //   return new Response(null, {

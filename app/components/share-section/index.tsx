@@ -6,6 +6,7 @@ import { Button, Text } from 'thon-ui';
 import WideCard from '../wide-card';
 import { StickerDataContext } from '../../providers/sticker-data-providers/index';
 import * as qs from 'qs';
+import { format } from 'date-fns';
 
 export default function ShareSection() {
   const { stickerData } = React.useContext(StickerDataContext);
@@ -22,8 +23,12 @@ export default function ShareSection() {
 
     const response = await fetch(generatorAPI);
     const blob = await response.blob();
+    const imageName = `Estou Na Torcida - ${stickerData.player.name} - ${format(
+      new Date(),
+      'dd-MM-yyyy HH-mm-ss'
+    )}.png`;
     const filesArray = [
-      new File([blob], 'gustavo-sales-sticker.png', {
+      new File([blob], imageName, {
         type: 'image/png',
         lastModified: new Date().getTime(),
       }),
@@ -36,7 +41,7 @@ export default function ShareSection() {
       navigator.share(shareData);
     } else {
       var link = document.createElement('a');
-      link.setAttribute('download', 'gustavo-sales-sticker.png');
+      link.setAttribute('download', imageName);
       link.href = generatorAPI;
 
       document.body.appendChild(link);
