@@ -8,6 +8,52 @@ import ShareSection from './components/share-section';
 export default function Home() {
   return (
     <>
+      <head>
+        <title>
+          Apoie a Seleção Brasileira na Copa do Mundo! - Estou Na Torcida
+        </title>
+        {/* Primary Meta Tags */}
+        <meta
+          name="title"
+          content="Apoie a Seleção Brasileira na Copa do Mundo! - Estou Na Torcida"
+        />
+        <meta
+          name="description"
+          content="Apoie a Seleção Brasileira nessa Copa do Mundo do Catar criando seu sticker personalizado, apenas 3 passos."
+        />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://estounatorcida.com.br/" />
+        <meta
+          property="og:title"
+          content="Apoie a Seleção Brasileira na Copa do Mundo! - Estou Na Torcida"
+        />
+        <meta
+          property="og:description"
+          content="Apoie a Seleção Brasileira nessa Copa do Mundo do Catar criando seu sticker personalizado, apenas 3 passos."
+        />
+        <meta
+          property="og:image"
+          content="https://estounatorcida.com.br/og-image.png"
+        />
+
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://estounatorcida.com.br/" />
+        <meta
+          property="twitter:title"
+          content="Apoie a Seleção Brasileira na Copa do Mundo! - Estou Na Torcida"
+        />
+        <meta
+          property="twitter:description"
+          content="Apoie a Seleção Brasileira nessa Copa do Mundo do Catar criando seu sticker personalizado, apenas 3 passos."
+        />
+        <meta
+          property="twitter:image"
+          content="https://estounatorcida.com.br/og-image.png"
+        />
+      </head>
       <HeroSection />
       <Text
         id="go-to-sticker"

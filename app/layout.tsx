@@ -12,7 +12,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <title>Apoie a Seleção Brasileira nessa Copa do Mundo!</title>
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
