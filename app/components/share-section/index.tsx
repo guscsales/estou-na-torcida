@@ -17,8 +17,11 @@ type OgFile = {
 export default function ShareSection() {
   const { stickerData } = React.useContext(StickerDataContext);
   const [files, setFiles] = React.useState<OgFile[]>([]);
-
   const [loading, setLoading] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    setFiles([]);
+  }, [stickerData]);
 
   async function handleGenerateFiles() {
     setLoading(true);

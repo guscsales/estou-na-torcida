@@ -41,7 +41,7 @@ const wideCardComponent = ({
         backgroundRepeat: 'no-repeat',
         fontFamily: '"Sans"',
       }}
-      tw={`w-[1200px] h-[628px] bg-black flex flex-col justify-end pb-7 pl-14`}
+      tw={`w-[1200px] h-[628px] bg-black flex flex-col justify-end pb-8 pl-14`}
     >
       <div
         style={{
