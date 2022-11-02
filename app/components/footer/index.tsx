@@ -2,6 +2,7 @@ import React from 'react';
 import Container from '../container';
 import { Text } from 'thon-ui';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Footer() {
   return (
@@ -89,7 +90,14 @@ export default function Footer() {
           aria-hidden
           className="text-center font-bold"
         >
-          Feedbacks ou bugs{' '}
+          Leia nossa{' '}
+          <Link
+            href="/private-policy"
+            className="text-emerald-700 hover:text-emerald-400 transition-colors duration-200 ease-in-out"
+          >
+            Política de Privacidade
+          </Link>{' '}
+          - Feedbacks ou bugs{' '}
           <a
             href="https://twitter.com/guscsales"
             target="_blank"
