@@ -20,17 +20,29 @@ export default function SocialMediaAuth() {
 
   React.useEffect(() => {
     const auth = getAuth();
-    getRedirectResult(auth).then((result) => {
-      if (result) {
-        const user: User = {
-          name: result.user.displayName || '',
-          pictureURL:
-            result.user.photoURL?.replace('_normal', '_400x400') || '',
-        };
+    getRedirectResult(auth)
+      .then((result) => {
+        if (result) {
+          const user: User = {
+            name: result.user.displayName || '',
+            pictureURL:
+              result.user.photoURL?.replace('_normal', '_400x400') || '',
+          };
 
-        setStickerData((prevValue) => ({ ...prevValue, user }));
-      }
-    });
+          setStickerData((prevValue) => ({ ...prevValue, user }));
+
+          if (gtag) {
+            gtag('event', 'login', {
+              method: result.providerId,
+            });
+          }
+        }
+      })
+      .catch((e) => {
+        if (gtag) {
+          gtag('event', 'login_error', e);
+        }
+      });
   }, [setStickerData]);
 
   async function handleTwitterAuth() {

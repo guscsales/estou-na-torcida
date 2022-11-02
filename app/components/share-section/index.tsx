@@ -64,6 +64,13 @@ export default function ShareSection() {
       });
     }
 
+    if (gtag) {
+      gtag('event', 'images_generated', {
+        player: stickerData.player.id,
+        phrase: stickerData.phrase.id,
+      });
+    }
+
     setFiles(files);
     setLoading(false);
   }
@@ -82,6 +89,11 @@ export default function ShareSection() {
         .share(shareData)
         .then(() => console.log('Share was successful.'))
         .catch((error) => console.log('Sharing failed', error));
+
+      gtag('event', 'shared_image', {
+        device: 'mobile',
+        type,
+      });
     } else {
       var link = document.createElement('a');
       link.setAttribute('download', imageName);
@@ -91,6 +103,13 @@ export default function ShareSection() {
 
       link.click();
       link.remove();
+
+      if (gtag) {
+        gtag('event', 'shared_image', {
+          device: 'desktop',
+          type,
+        });
+      }
     }
   }
 
