@@ -64,12 +64,10 @@ export default function ShareSection() {
       });
     }
 
-    if (gtag) {
-      gtag('event', 'images_generated', {
-        player: stickerData.player.id,
-        phrase: stickerData.phrase.id,
-      });
-    }
+    gtag('event', 'images_generated', {
+      player: stickerData.player.id,
+      phrase: stickerData.phrase.id,
+    });
 
     setFiles(files);
     setLoading(false);
@@ -104,12 +102,10 @@ export default function ShareSection() {
       link.click();
       link.remove();
 
-      if (gtag) {
-        gtag('event', 'shared_image', {
-          device: 'desktop',
-          type,
-        });
-      }
+      gtag('event', 'shared_image', {
+        device: 'desktop',
+        type,
+      });
     }
   }
 

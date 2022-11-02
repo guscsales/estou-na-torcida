@@ -48,6 +48,18 @@ export default function RootLayout({
             />
           </>
         )}
+        {process.env.NODE_ENV !== 'production' && (
+          <>
+            {/* eslint-disable-next-line @next/next/no-before-interactive-script-outside-document */}
+            <Script
+              id="analytics-provider-init"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `function gtag(){}`,
+              }}
+            />
+          </>
+        )}
       </head>
       <body className="overflow-x-hidden">
         <Header />

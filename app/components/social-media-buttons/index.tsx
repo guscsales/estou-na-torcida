@@ -31,17 +31,13 @@ export default function SocialMediaAuth() {
 
           setStickerData((prevValue) => ({ ...prevValue, user }));
 
-          if (gtag) {
-            gtag('event', 'login', {
-              method: result.providerId,
-            });
-          }
+          gtag('event', 'login', {
+            method: result.providerId,
+          });
         }
       })
       .catch((e) => {
-        if (gtag) {
-          gtag('event', 'login_error', e);
-        }
+        gtag('event', 'login_error', e);
       });
   }, [setStickerData]);
 
