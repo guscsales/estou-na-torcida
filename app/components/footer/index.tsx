@@ -5,8 +5,8 @@ import Image from 'next/image';
 
 export default function Footer() {
   return (
-    <footer className="mt-28 pb-6 relative z-30">
-      <Container>
+    <footer className="mt-28 pb-6 relative z-30 border-t border-solid border-t-gray-200 pt-3">
+      <Container className="flex flex-col gap-2">
         <div
           className="flex items-center justify-center gap-0.5 mt-3"
           aria-hidden
@@ -17,7 +17,7 @@ export default function Footer() {
             aria-hidden
             className="text-center phone:hidden font-bold"
           >
-            &copy; Estou na Torcida criado com{' '}
+            &copy; &quot;Estou na Torcida&quot; criado com{' '}
             <Image
               src="/images/heart.svg"
               alt="Heart"
@@ -52,7 +52,7 @@ export default function Footer() {
             aria-hidden
             className="text-center sm:hidden font-bold"
           >
-            &copy; Estou na Torcida criado com{' '}
+            &copy; &quot;Estou na Torcida&quot; criado com{' '}
             <Image
               src="/images/heart.svg"
               alt="Heart"
@@ -83,6 +83,22 @@ export default function Footer() {
             </a>
           </Text>
         </div>
+        <Text
+          as="div"
+          variant="xs"
+          aria-hidden
+          className="text-center font-bold"
+        >
+          Feedbacks ou bugs{' '}
+          <a
+            href="https://twitter.com/guscsales"
+            target="_blank"
+            rel="noreferrer"
+            className="text-emerald-700 hover:text-emerald-400 transition-colors duration-200 ease-in-out"
+          >
+            entre em contato
+          </a>
+        </Text>
       </Container>
     </footer>
   );

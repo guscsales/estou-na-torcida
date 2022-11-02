@@ -1,3 +1,4 @@
+import Script from 'next/script';
 import 'thon-ui/core/base.css';
 import Footer from './components/footer';
 import Header from './components/header';
@@ -25,6 +26,29 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,700&display=swap"
           rel="stylesheet"
         />
+
+        {process.env.NODE_ENV === 'production' && (
+          <>
+            {/* eslint-disable-next-line @next/next/no-before-interactive-script-outside-document */}
+            <Script
+              id="analytics-provider"
+              strategy="beforeInteractive"
+              src="https://www.googletagmanager.com/gtag/js?id=G-YBX8N6YF14"
+            />
+            <Script
+              id="analytics-provider-init"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-YBX8N6YF14');
+        `,
+              }}
+            />
+          </>
+        )}
       </head>
       <body className="overflow-x-hidden">
         <Header />
