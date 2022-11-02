@@ -92,7 +92,7 @@ export default function Footer() {
         >
           Leia nossa{' '}
           <Link
-            href="/private-policy"
+            href="/politica-de-privacidade"
             className="text-emerald-700 hover:text-emerald-400 transition-colors duration-200 ease-in-out"
           >
             Política de Privacidade
