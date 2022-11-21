@@ -18,35 +18,28 @@ import { User } from '../../shared/models/user';
 export default function SocialMediaAuth() {
   const { setStickerData } = React.useContext(StickerDataContext);
 
-  React.useEffect(() => {
-    const auth = getAuth();
-    getRedirectResult(auth)
-      .then((result) => {
-        if (result) {
-          const user: User = {
-            name: result.user.displayName || '',
-            pictureURL:
-              result.user.photoURL?.replace('_normal', '_400x400') || '',
-          };
-
-          setStickerData((prevValue) => ({ ...prevValue, user }));
-
-          gtag('event', 'login', {
-            method: result.providerId,
-          });
-        }
-      })
-      .catch((e) => {
-        gtag('event', 'login_error', e);
-      });
-  }, [setStickerData]);
-
   async function handleTwitterAuth() {
     const auth = getAuth();
     auth.useDeviceLanguage();
 
     const provider = new TwitterAuthProvider();
-    signInWithRedirect(auth, provider);
+
+    try {
+      const { user: twitterUser } = await signInWithPopup(auth, provider);
+
+      const user: User = {
+        name: twitterUser.displayName || '',
+        pictureURL: twitterUser.photoURL?.replace('_normal', '_400x400') || '',
+      };
+
+      setStickerData((prevValue) => ({ ...prevValue, user }));
+
+      gtag('event', 'login', {
+        method: 'twitter',
+      });
+    } catch (e) {
+      gtag('event', 'login_error', { error: e, method: 'twitter' });
+    }
   }
 
   async function handleFacebookAuth() {
@@ -54,9 +47,27 @@ export default function SocialMediaAuth() {
     auth.useDeviceLanguage();
 
     const provider = new FacebookAuthProvider();
+    provider.setCustomParameters({
+      display: 'popup',
+    });
     provider.addScope('public_profile');
 
-    signInWithRedirect(auth, provider);
+    try {
+      const { user: facebookUser } = await signInWithPopup(auth, provider);
+
+      const user: User = {
+        name: facebookUser.displayName || '',
+        pictureURL: facebookUser.photoURL || '',
+      };
+
+      setStickerData((prevValue) => ({ ...prevValue, user }));
+
+      gtag('event', 'login', {
+        method: 'facebook',
+      });
+    } catch (e) {
+      gtag('event', 'login_error', { error: e, method: 'facebook' });
+    }
   }
 
   async function handleGoogleAuth() {
@@ -65,7 +76,22 @@ export default function SocialMediaAuth() {
 
     const provider = new GoogleAuthProvider();
 
-    signInWithRedirect(auth, provider);
+    try {
+      const { user: googleUser } = await signInWithPopup(auth, provider);
+
+      const user: User = {
+        name: googleUser.displayName || '',
+        pictureURL: googleUser.photoURL || '',
+      };
+
+      setStickerData((prevValue) => ({ ...prevValue, user }));
+
+      gtag('event', 'login', {
+        method: 'google',
+      });
+    } catch (e) {
+      gtag('event', 'login_error', { error: e, method: 'google' });
+    }
   }
 
   return (
