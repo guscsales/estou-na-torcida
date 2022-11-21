@@ -20,8 +20,8 @@ export default function SocialMediaSection() {
           Entre com alguma rede social
         </Text>
         <Text as="p" variant="sm sm:base" className="text-gray-500 w-10/12">
-          Coletaremos algumas para gerar seu sticker personalizado. Nenhum dado
-          seu será armezenado.
+          Para mostrar sua foto e nome na imagem personalizada. Nenhum dado seu
+          será armezenado.
         </Text>
       </header>
       <div>

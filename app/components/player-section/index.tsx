@@ -26,7 +26,7 @@ export default function PlayerSection() {
           Escolha um jogador da seleção
         </Text>
         <Text as="p" variant="sm sm:base" className="text-gray-500 w-10/12">
-          Esse jogador irá aparecer no seu sitcker, você pode escolher qualquer
+          Esse jogador irá aparecer na sua imagem, você pode escolher qualquer
           um e até mesmo o técnico.
         </Text>
       </header>

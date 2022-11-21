@@ -9,17 +9,15 @@ export default function Home() {
   return (
     <>
       <head>
-        <title>
-          Apoie a Seleção Brasileira na Copa do Mundo! - Estou Na Torcida
-        </title>
+        <title>Crie sua Imagem de Apoio a Seleção! - Estou Na Torcida</title>
         {/* Primary Meta Tags */}
         <meta
           name="title"
-          content="Apoie a Seleção Brasileira na Copa do Mundo! - Estou Na Torcida"
+          content="Crie sua Imagem de Apoio a Seleção! - Estou Na Torcida"
         />
         <meta
           name="description"
-          content="Apoie a Seleção Brasileira nessa Copa do Mundo do Catar criando seu sticker personalizado, apenas 3 passos."
+          content="Apoie a Seleção Brasileira nessa Copa do Mundo criando sua imagem personalizada gratuitamente, apenas 3 passos."
         />
 
         {/* Open Graph / Facebook */}
@@ -27,11 +25,11 @@ export default function Home() {
         <meta property="og:url" content="https://estounatorcida.com.br/" />
         <meta
           property="og:title"
-          content="Apoie a Seleção Brasileira na Copa do Mundo! - Estou Na Torcida"
+          content="Crie sua Imagem de Apoio a Seleção! - Estou Na Torcida"
         />
         <meta
           property="og:description"
-          content="Apoie a Seleção Brasileira nessa Copa do Mundo do Catar criando seu sticker personalizado, apenas 3 passos."
+          content="Apoie a Seleção Brasileira nessa Copa do Mundo criando sua imagem personalizada gratuitamente, apenas 3 passos."
         />
         <meta
           property="og:image"
@@ -43,11 +41,11 @@ export default function Home() {
         <meta property="twitter:url" content="https://estounatorcida.com.br/" />
         <meta
           property="twitter:title"
-          content="Apoie a Seleção Brasileira na Copa do Mundo! - Estou Na Torcida"
+          content="Crie sua Imagem de Apoio a Seleção! - Estou Na Torcida"
         />
         <meta
           property="twitter:description"
-          content="Apoie a Seleção Brasileira nessa Copa do Mundo do Catar criando seu sticker personalizado, apenas 3 passos."
+          content="Apoie a Seleção Brasileira nessa Copa do Mundo criando sua imagem personalizada gratuitamente, apenas 3 passos."
         />
         <meta
           property="twitter:image"
@@ -61,7 +59,7 @@ export default function Home() {
         variant="xl sm:3xl"
         className="bg-gray-200 text-gray-700 w-full text-center py-6 sm:py-9 mt-9 sm:mt-12 lg:mt-36 mb-6 sm:mb-14 relative z-30"
       >
-        Apenas 3 passos até seu sticker!
+        Apenas 3 passos até sua imagem!
       </Text>
       <article className="grid gap-9 sm:gap-24">
         <SocialMediaSection />

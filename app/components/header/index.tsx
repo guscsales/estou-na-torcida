@@ -14,7 +14,7 @@ export default function Header() {
         variant="primary"
         className="hidden sm:inline-flex"
       >
-        Criar meu Sticker
+        Criar Minha Imagem
       </Button>
     </header>
   );

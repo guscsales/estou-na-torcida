@@ -13,15 +13,16 @@ export default function HeroSection() {
           variant="4xl sm:5xl 2xl:6xl"
           className="text-emerald-700 text-center sm:text-left mb-3"
         >
-          Apoie o Brasil na Copa do Mundo do Catar
+          Crie Sua Imagem Personalizada de Apoio a Seleção
         </Text>
         <Text
           as="p"
           variant="base"
           className="text-gray-500 text-center sm:text-left"
         >
-          Crie seu sticker personalizado e demonstre todo o seu apoio de
-          torcedor nas suas redes sociais!
+          Escolha um jogador, uma frase e demonstre todo o seu apoio ao Brasil
+          postando fotos e stories nas suas redes sociais!{' '}
+          <strong>Crie quantas imagens quiser, é gratis!</strong>
         </Text>
 
         <Button
@@ -30,7 +31,7 @@ export default function HeroSection() {
           variant="primary"
           className="w-full sm:w-7/12 xl:w-5/12 mt-12"
         >
-          Criar meu Sticker
+          Criar Minha Imagem
         </Button>
       </div>
       <div className="relative h-[240px]">

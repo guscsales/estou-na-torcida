@@ -2,6 +2,7 @@ import { SupportPhrase } from '../models/support-phrase';
 
 export const phrases: SupportPhrase[] = [
   { id: '1', phrase: 'Vai Brasil!<br />Rumo ao Hexa!' },
+  { id: '15', phrase: 'Gooooool!<br /> É do BRASIL!' },
   { id: '2', phrase: 'Sou Brasileiro com Muito Orgulho!' },
   { id: '3', phrase: 'Sou Brasileira com Muito Orgulho!' },
   { id: '4', phrase: 'Sou Brasileiro com Muito Amor!' },
@@ -15,5 +16,4 @@ export const phrases: SupportPhrase[] = [
   { id: '12', phrase: 'Olha o gol<br />Olha o gooool!' },
   { id: '13', phrase: 'Meu Coração é<br />Verde e Amarelo' },
   { id: '14', phrase: 'Haaaaaaaja<br />Coração!' },
-  { id: '15', phrase: 'Gooooool!<br /> É do BRASIL!' },
 ];
