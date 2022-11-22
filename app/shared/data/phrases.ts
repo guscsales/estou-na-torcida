@@ -1,8 +1,11 @@
 import { SupportPhrase } from '../models/support-phrase';
 
 export const phrases: SupportPhrase[] = [
-  { id: '1', phrase: 'Vai Brasil!<br />Rumo ao Hexa!' },
+  { id: '17', phrase: 'Preparado para<br />Brasil x Sérvia' },
+  { id: '18', phrase: 'Preparada para<br />Brasil x Sérvia' },
   { id: '15', phrase: 'Gooooool!<br /> É do BRASIL!' },
+  { id: '1', phrase: 'Vai Brasil!<br />Rumo ao Hexa!' },
+  { id: '16', phrase: 'Já tô no Aquecimento!' },
   { id: '2', phrase: 'Sou Brasileiro com Muito Orgulho!' },
   { id: '3', phrase: 'Sou Brasileira com Muito Orgulho!' },
   { id: '4', phrase: 'Sou Brasileiro com Muito Amor!' },
