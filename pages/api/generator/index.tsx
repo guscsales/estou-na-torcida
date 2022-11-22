@@ -83,7 +83,7 @@ const wideCardComponent = ({
             }}
           >
             <div>#EstouNaTorcida pela</div>
-            <div>Seleção Braseileira no Catar</div>
+            <div>Seleção Brasileira no Catar</div>
           </span>
         </div>
       </div>
@@ -170,7 +170,7 @@ const feedCardComponent = ({
             }}
           >
             <div>#EstouNaTorcida pela</div>
-            <div>Seleção Braseileira no Catar</div>
+            <div>Seleção Brasileira no Catar</div>
           </span>
         </div>
       </div>
@@ -251,7 +251,7 @@ const storiesCardComponent = ({
               }}
             >
               <div>#EstouNaTorcida pela</div>
-              <div>Seleção Braseileira no Catar</div>
+              <div>Seleção Brasileira no Catar</div>
             </span>
           </div>
         </div>

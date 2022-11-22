@@ -54,7 +54,7 @@ export default function WideCard({
           >
             #EstouNaTorcida pela
             <br />
-            Seleção Braseileira no Catar
+            Seleção Brasileira no Catar
           </span>
         </div>
       </div>
