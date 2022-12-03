@@ -41,6 +41,15 @@ export default function StickerDataProvider({
     defaultValue.stickerData
   );
 
+  React.useEffect(() => {
+    if (!stickerData?.user) {
+      const storedUser = localStorage.getItem('authUser');
+      const user = storedUser ? JSON.parse(storedUser) : null;
+
+      setStickerData((prevValue) => ({ ...prevValue, user }));
+    }
+  }, [stickerData.user]);
+
   return (
     <StickerDataContext.Provider value={{ stickerData, setStickerData }}>
       {children}

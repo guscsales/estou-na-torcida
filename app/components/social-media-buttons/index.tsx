@@ -34,6 +34,8 @@ export default function SocialMediaAuth() {
 
       setStickerData((prevValue) => ({ ...prevValue, user }));
 
+      localStorage.setItem('authUser', JSON.stringify(user));
+
       gtag('event', 'login', {
         method: 'twitter',
       });
@@ -61,6 +63,7 @@ export default function SocialMediaAuth() {
       };
 
       setStickerData((prevValue) => ({ ...prevValue, user }));
+      localStorage.setItem('authUser', JSON.stringify(user));
 
       gtag('event', 'login', {
         method: 'facebook',
@@ -85,6 +88,7 @@ export default function SocialMediaAuth() {
       };
 
       setStickerData((prevValue) => ({ ...prevValue, user }));
+      localStorage.setItem('authUser', JSON.stringify(user));
 
       gtag('event', 'login', {
         method: 'google',
