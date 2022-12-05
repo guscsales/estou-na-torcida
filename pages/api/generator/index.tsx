@@ -1,8 +1,7 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiRequest } from 'next';
 import { ImageResponse } from '@vercel/og';
-import { User } from '../../../app/shared/models/user';
 import { phrases } from '../../../app/shared/data/phrases';
-import * as qs from 'qs';
+import { parseQuery } from '../../../app/shared/services/parse-query/index';
 
 export const config = {
   runtime: 'experimental-edge',
@@ -284,30 +283,15 @@ const storiesCardComponent = ({
   );
 };
 
-function parseQuery(queryString: string) {
-  var query: any = {};
-  var pairs = (
-    queryString[0] === '?' ? queryString.substr(1) : queryString
-  ).split('&');
-  for (var i = 0; i < pairs.length; i++) {
-    var pair = pairs[i].split('=');
-    query[decodeURIComponent(pair[0])] = decodeURIComponent(
-      pair[1] || ''
-    ).replaceAll('+', ' ');
-  }
-  return query;
-}
-
 export default async function handler(req: NextApiRequest) {
   const [, queryString] = (req.url || '').split('?');
   const params = parseQuery(queryString) as unknown as Params;
 
-  // TODO: use schema validator here
-  // if (!params.name || !params.pic || !params.type) {
-  //   return new Response(null, {
-  //     status: 404,
-  //   });
-  // }
+  if (!params.name || !params.pictureURL || !params.type) {
+    return new Response(null, {
+      status: 404,
+    });
+  }
 
   const fontData = await font;
   const fontItalicData = await fontItalic;
