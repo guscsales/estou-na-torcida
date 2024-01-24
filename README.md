@@ -1,4 +1,4 @@
-![Estou Na Torcida Cover](http://estounatorcida.com.br/og-image.png)
+![Estou Na Torcida Cover](http://estou-na-torcida.vercel.app/og-image.png)
 
 ---
 
