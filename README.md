@@ -8,7 +8,7 @@ Projeto criado em homenagem e apoio à seleção brasileira na Copa do Mundo do 
 
 ## Como Criar
 
-Para criar seu sticker, basta ir até [estounatorcida.com.br](estounatorcida.com.br) e seguir os 3 passos descritos lá.
+Para criar seu sticker, basta ir até [estou-na-torcida.vercel.app](https://estou-na-torcida.vercel.app/) e seguir os 3 passos descritos lá.
 
 ## Rodando na sua máquina
 
