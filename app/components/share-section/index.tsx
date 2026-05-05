@@ -2,7 +2,10 @@
 
 import React from 'react';
 import Container from '../container/index';
-import { Button, Text } from 'thon-ui';
+import type { Locale } from '../../i18n/config';
+import type { Dictionary } from '../../i18n/format';
+import { translate } from '../../i18n/format';
+import { Button, Text } from '../ui';
 import WideCard from '../wide-card';
 import { StickerDataContext } from '../../providers/sticker-data-providers/index';
 import * as qs from 'qs';
@@ -14,13 +17,20 @@ type OgFile = {
   apiGenerator: string;
 };
 
-export default function ShareSection() {
+type Props = {
+  dictionary: Dictionary;
+  lang: Locale;
+};
+
+export default function ShareSection({ dictionary, lang }: Props) {
   const { stickerData } = React.useContext(StickerDataContext);
   const [files, setFiles] = React.useState<OgFile[]>([]);
   const [loading, setLoading] = React.useState<boolean>(false);
 
   React.useEffect(() => {
-    setFiles([]);
+    const timeout = window.setTimeout(() => setFiles([]), 0);
+
+    return () => window.clearTimeout(timeout);
   }, [stickerData]);
 
   async function handleGenerateFiles() {
@@ -28,6 +38,7 @@ export default function ShareSection() {
 
     const generateParams = (type: string) =>
       qs.stringify({
+        locale: lang,
         type,
         ...stickerData.user,
         playerId: stickerData.player.id,
@@ -43,7 +54,7 @@ export default function ShareSection() {
       fetch(`/api/generator?${generateParams(types[2])}`),
     ]);
 
-    const files = [];
+    const generatedFiles: OgFile[] = [];
 
     for (let i = 0; i < responses.length; i++) {
       const response = responses[i];
@@ -56,7 +67,7 @@ export default function ShareSection() {
         type: blob.type,
       });
 
-      files.push({
+      generatedFiles.push({
         type,
         imageName,
         file,
@@ -69,7 +80,7 @@ export default function ShareSection() {
       phrase: stickerData.phrase.id,
     });
 
-    setFiles(files);
+    setFiles(generatedFiles);
     setLoading(false);
   }
 
@@ -93,7 +104,7 @@ export default function ShareSection() {
         type,
       });
     } else {
-      var link = document.createElement('a');
+      const link = document.createElement('a');
       link.setAttribute('download', imageName);
       link.href = apiGenerator;
 
@@ -110,18 +121,17 @@ export default function ShareSection() {
   }
 
   return (
-    <Container className="grid sm:grid-cols-[350px_1fr] lg:grid-cols-[480px_1fr] gap-4 xl:gap-20 items-center">
+    <Container id="share-section" className="grid sm:grid-cols-[350px_1fr] lg:grid-cols-[480px_1fr] gap-4 xl:gap-20 items-center">
       <header className="self-start">
         <Text
           as="h2"
           variant="3xl sm:4xl lg:5xl"
           className="text-emerald-700 mb-2"
         >
-          Compartilhe seu sticker nas redes
+          {translate(dictionary, 'share.title')}
         </Text>
         <Text as="p" variant="sm sm:base" className="text-gray-500 w-10/12">
-          Você tem 3 tipos de stickers, um como esse ao lado outro no formato
-          para feed e outro para stories.
+          {translate(dictionary, 'share.description')}
         </Text>
 
         <div className="relative h-[240px] sm:hidden">
@@ -154,6 +164,7 @@ export default function ShareSection() {
             player={stickerData.player}
             user={stickerData.user}
             supportPhrase={stickerData.phrase}
+            dictionary={dictionary}
           />
         </div>
 
@@ -166,7 +177,7 @@ export default function ShareSection() {
               }}
               loading={loading}
             >
-              Compartilhar
+              {translate(dictionary, 'share.generate')}
             </Button>
           </div>
         ) : (
@@ -178,7 +189,7 @@ export default function ShareSection() {
                   handleShare('feed');
                 }}
               >
-                Compartilhar no Feed
+                {translate(dictionary, 'share.feed')}
               </Button>
               <Button
                 variant="primary"
@@ -186,7 +197,7 @@ export default function ShareSection() {
                   handleShare('stories');
                 }}
               >
-                Compartilhar nos Stories
+                {translate(dictionary, 'share.stories')}
               </Button>
               <Button
                 variant="primary"
@@ -194,7 +205,7 @@ export default function ShareSection() {
                   handleShare('wide');
                 }}
               >
-                Download da Imagem Acima
+                {translate(dictionary, 'share.downloadAbove')}
               </Button>
             </div>
             <div className="flex-col gap-3 mt-4 sm:w-9/12 lg:w-8/12 hidden xl:flex relative z-30">
@@ -204,7 +215,7 @@ export default function ShareSection() {
                   handleShare('feed');
                 }}
               >
-                Download Para o Feed
+                {translate(dictionary, 'share.downloadFeed')}
               </Button>
               <Button
                 variant="primary"
@@ -212,7 +223,7 @@ export default function ShareSection() {
                   handleShare('stories');
                 }}
               >
-                Download Para os Stories
+                {translate(dictionary, 'share.downloadStories')}
               </Button>
               <Button
                 variant="primary"
@@ -220,7 +231,7 @@ export default function ShareSection() {
                   handleShare('wide');
                 }}
               >
-                Download da Imagem Ao Lado
+                {translate(dictionary, 'share.downloadSide')}
               </Button>
             </div>
           </>
@@ -256,6 +267,7 @@ export default function ShareSection() {
           player={stickerData.player}
           user={stickerData.user}
           supportPhrase={stickerData.phrase}
+          dictionary={dictionary}
         />
       </div>
     </Container>

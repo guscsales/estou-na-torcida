@@ -7,15 +7,19 @@ import {
   FacebookAuthProvider,
   TwitterAuthProvider,
   signInWithPopup,
-  signInWithRedirect,
-  getRedirectResult,
 } from 'firebase/auth';
 import React from 'react';
-import { Button } from 'thon-ui';
+import type { Dictionary } from '../../i18n/format';
+import { translate } from '../../i18n/format';
+import { Button } from '../ui';
 import { StickerDataContext } from '../../providers/sticker-data-providers/index';
 import { User } from '../../shared/models/user';
 
-export default function SocialMediaAuth() {
+type Props = {
+  dictionary: Dictionary;
+};
+
+export default function SocialMediaAuth({ dictionary }: Props) {
   const { setStickerData } = React.useContext(StickerDataContext);
 
   async function handleTwitterAuth() {
@@ -106,7 +110,7 @@ export default function SocialMediaAuth() {
         textClassName="text-gray-50"
         onClick={handleTwitterAuth}
       >
-        Entrar com Twitter
+        {translate(dictionary, 'social.twitter')}
       </Button>
       <Button
         variant="custom"
@@ -114,7 +118,7 @@ export default function SocialMediaAuth() {
         textClassName="text-gray-50"
         onClick={handleFacebookAuth}
       >
-        Entrar com Facebook
+        {translate(dictionary, 'social.facebook')}
       </Button>
       <Button
         variant="custom"
@@ -122,7 +126,7 @@ export default function SocialMediaAuth() {
         textClassName="text-gray-50"
         onClick={handleGoogleAuth}
       >
-        Entrar com Google
+        {translate(dictionary, 'social.google')}
       </Button>
     </>
   );

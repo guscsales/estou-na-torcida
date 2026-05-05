@@ -1,10 +1,16 @@
-import { Button, Text } from 'thon-ui';
+import type { Dictionary } from '../../i18n/format';
+import { translate } from '../../i18n/format';
+import { Button, Text } from '../ui';
 import Container from '../container';
 import WideCard from '../wide-card';
 import { phrases } from '../../shared/data/phrases';
 import { players } from 'app/shared/data/players';
 
-export default function HeroSection() {
+type Props = {
+  dictionary: Dictionary;
+};
+
+export default function HeroSection({ dictionary }: Props) {
   return (
     <Container className="grid sm:grid-cols-[350px_1fr] xl:grid-cols-[560px_1fr] sm:justify-between mt-10 lg:mt-24">
       <div>
@@ -13,16 +19,15 @@ export default function HeroSection() {
           variant="4xl sm:5xl 2xl:6xl"
           className="text-emerald-700 text-center sm:text-left mb-3"
         >
-          Crie Sua Imagem Personalizada de Apoio a Seleção
+          {translate(dictionary, 'home.hero.title')}
         </Text>
         <Text
           as="p"
           variant="base"
           className="text-gray-500 text-center sm:text-left"
         >
-          Escolha um jogador, uma frase e demonstre todo o seu apoio ao Brasil
-          postando fotos e stories nas suas redes sociais!{' '}
-          <strong>Crie quantas imagens quiser, é gratis!</strong>
+          {translate(dictionary, 'home.hero.description')}{' '}
+          <strong>{translate(dictionary, 'home.hero.highlight')}</strong>
         </Text>
 
         <Button
@@ -31,7 +36,7 @@ export default function HeroSection() {
           variant="primary"
           className="w-full sm:w-7/12 xl:w-5/12 mt-12"
         >
-          Criar Minha Imagem
+          {translate(dictionary, 'home.hero.cta')}
         </Button>
       </div>
       <div className="relative h-[240px]">
@@ -67,6 +72,7 @@ export default function HeroSection() {
             pictureURL: '/images/gus.jpeg',
           }}
           supportPhrase={phrases[0]}
+          dictionary={dictionary}
         />
       </div>
     </Container>

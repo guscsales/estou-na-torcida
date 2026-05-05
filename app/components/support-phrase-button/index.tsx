@@ -1,17 +1,23 @@
 import { SupportPhrase } from 'app/shared/models/support-phrase';
 import classNames from 'classnames';
-import { Text } from 'thon-ui';
+import type { Dictionary } from '../../i18n/format';
+import { translate, translateLines } from '../../i18n/format';
+import { Text } from '../ui';
 
 type Props = {
   supportPhrase: SupportPhrase;
   active?: boolean;
+  dictionary: Dictionary;
 };
 
 export default function SupportPhraseButton({
   supportPhrase,
   active,
+  dictionary,
   ...props
 }: Props & React.HTMLAttributes<HTMLElement>) {
+  const phrase = translate(dictionary, supportPhrase.translationKey);
+
   const nameClassName = classNames(
     `w-full py-3.5 px-4 rounded-xl relative
     border-solid border-3 h-20 flex items-center
@@ -33,12 +39,21 @@ export default function SupportPhraseButton({
   return (
     <button
       className="group w-full"
-      aria-label={`Escolher a frase "${supportPhrase.phrase}"`}
+      aria-label={translate(dictionary, 'phrase.selectAria', {
+        phrase: phrase.replaceAll('\n', ' '),
+      })}
       {...props}
     >
       <div className={nameClassName}>
         <Text as="div" variant="sm" className={textClassName}>
-          <span dangerouslySetInnerHTML={{ __html: supportPhrase.phrase }} />
+          {translateLines(dictionary, supportPhrase.translationKey).map(
+            (line, index, lines) => (
+              <span key={line}>
+                {line}
+                {index < lines.length - 1 && <br />}
+              </span>
+            )
+          )}
         </Text>
       </div>
     </button>

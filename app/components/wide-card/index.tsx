@@ -4,17 +4,21 @@ import { Player } from '../../shared/models/player';
 import { User } from '../../shared/models/user';
 import { SupportPhrase } from '../../shared/models/support-phrase';
 import Image from 'next/image';
+import type { Dictionary } from '../../i18n/format';
+import { translate, translateLines } from '../../i18n/format';
 
 type Props = {
   player: Player;
   user?: User;
   supportPhrase: SupportPhrase;
+  dictionary: Dictionary;
 };
 
 export default function WideCard({
   player,
   user,
   supportPhrase,
+  dictionary,
   ...props
 }: Props & React.HTMLAttributes<HTMLElement>) {
   const className = classNames(
@@ -34,11 +38,12 @@ export default function WideCard({
       <div className="flex gap-2 items-center mt-20 h-[88px]">
         {user && (
           <div className="rounded-full w-20 h-20 border-2 border-solid border-white p-0.5 overflow-hidden">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
             <Image
               src={user?.pictureURL || '/images/default-avatar.png'}
               className="flex rounded-full"
-              alt={`Foto de ${user?.name ? user.name : 'um avatar padrão'}`}
+              alt={translate(dictionary, 'wideCard.userImageAlt', {
+                name: user?.name || translate(dictionary, 'wideCard.defaultAvatar'),
+              })}
               referrerPolicy="no-referrer"
               width={80}
               height={80}
@@ -52,20 +57,26 @@ export default function WideCard({
           <span
             className={'font-bold italic text-lg text-amber-300 drop-shadow-md'}
           >
-            #EstouNaTorcida pela
+            {translate(dictionary, 'wideCard.tagline.1')}
             <br />
-            Seleção Brasileira no Catar
+            {translate(dictionary, 'wideCard.tagline.2')}
           </span>
         </div>
       </div>
       <h1
         className="text-white text-8xl w-full pr-12 my-7 drop-shadow-green h-48 flex items-center font-bold"
-        dangerouslySetInnerHTML={{
-          __html: supportPhrase.phrase,
-        }}
-      />
+      >
+        {translateLines(dictionary, supportPhrase.translationKey).map(
+          (line, index, lines) => (
+            <React.Fragment key={line}>
+              {line}
+              {index < lines.length - 1 && <br />}
+            </React.Fragment>
+          )
+        )}
+      </h1>
       <span className={'italic text-lg text-amber-300 drop-shadow-md'}>
-        Apoie também em estounatorcida.com.br
+        {translate(dictionary, 'wideCard.footer')}
       </span>
     </div>
   );

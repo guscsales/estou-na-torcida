@@ -3,10 +3,16 @@
 import React from 'react';
 import SocialMediaAuth from '../social-media-buttons';
 import Container from '../container/index';
-import { Text } from 'thon-ui';
+import type { Dictionary } from '../../i18n/format';
+import { translate } from '../../i18n/format';
+import { Text } from '../ui';
 import { StickerDataContext } from '../../providers/sticker-data-providers/index';
 
-export default function SocialMediaSection() {
+type Props = {
+  dictionary: Dictionary;
+};
+
+export default function SocialMediaSection({ dictionary }: Props) {
   const { stickerData } = React.useContext(StickerDataContext);
 
   return (
@@ -17,16 +23,15 @@ export default function SocialMediaSection() {
           variant="3xl sm:4xl lg:5xl"
           className="text-emerald-700 mb-2"
         >
-          Entre com alguma rede social
+          {translate(dictionary, 'social.title')}
         </Text>
         <Text as="p" variant="sm sm:base" className="text-gray-500 w-10/12">
-          Para mostrar sua foto e nome na imagem personalizada. Nenhum dado seu
-          será armezenado.
+          {translate(dictionary, 'social.description')}
         </Text>
       </header>
       <div>
         <div className="grid grid-cols-1 lg:grid-cols-3 lg:flex-row gap-2 sm:mx-auto sm:w-[260px] lg:w-full lg:justify-end">
-          <SocialMediaAuth />
+          <SocialMediaAuth dictionary={dictionary} />
         </div>
         {stickerData.user && (
           <div className="py-3 px-5 bg-emerald-900/[.8] rounded-lg mt-3">
@@ -35,8 +40,9 @@ export default function SocialMediaSection() {
               variant="base"
               className="text-gray-50 text-center sm:text-left"
             >
-              {stickerData.user?.name.split(' ')[0]} deu tudo certo com a
-              conexão. Continue nos próximos passos.
+              {translate(dictionary, 'social.connected', {
+                firstName: stickerData.user?.name.split(' ')[0] ?? '',
+              })}
             </Text>
           </div>
         )}

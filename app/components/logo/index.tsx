@@ -1,10 +1,14 @@
 import Image from 'next/image';
 
-export default function Logo() {
+type Props = {
+  alt: string;
+};
+
+export default function Logo({ alt }: Props) {
   return (
     <Image
       src="/images/logo-estou-na-torcida.svg"
-      alt="Logo do Estou Na Torcida"
+      alt={alt}
       priority
       width={230}
       height={70}

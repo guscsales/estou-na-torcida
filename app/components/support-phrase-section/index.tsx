@@ -2,13 +2,19 @@
 
 import React from 'react';
 import Container from '../container/index';
-import { Text } from 'thon-ui';
+import type { Dictionary } from '../../i18n/format';
+import { translate } from '../../i18n/format';
+import { Text } from '../ui';
 import SupportPhraseButton from '../support-phrase-button';
 import { SupportPhrase } from '../../shared/models/support-phrase';
 import { StickerDataContext } from '../../providers/sticker-data-providers/index';
 import { phrases } from '../../shared/data/phrases';
 
-export default function SupportPhraseSection() {
+type Props = {
+  dictionary: Dictionary;
+};
+
+export default function SupportPhraseSection({ dictionary }: Props) {
   const { stickerData, setStickerData } = React.useContext(StickerDataContext);
 
   function handleSelectPhrase(phrase: SupportPhrase) {
@@ -23,11 +29,10 @@ export default function SupportPhraseSection() {
           variant="3xl sm:4xl lg:5xl"
           className="text-emerald-700 mb-2"
         >
-          Escolha uma frase de apoio
+          {translate(dictionary, 'phrase.title')}
         </Text>
         <Text as="p" variant="sm sm:base" className="text-gray-500 w-10/12">
-          Essa frase será parte do seu sticker e ela demonstrará seu apoio de
-          torcedor ou torcedora.
+          {translate(dictionary, 'phrase.description')}
         </Text>
       </header>
       <div>
@@ -37,6 +42,7 @@ export default function SupportPhraseSection() {
               key={phrase.id}
               supportPhrase={phrase}
               active={phrase.id === stickerData.phrase.id}
+              dictionary={dictionary}
               onClick={() => handleSelectPhrase(phrase)}
             />
           ))}

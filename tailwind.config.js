@@ -1,9 +1,6 @@
-const { thonUI, thonUIContent } = require('thon-ui/plugin');
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['app/**/*.tsx', thonUIContent()],
-  jit: true,
+  content: ['app/**/*.{ts,tsx}', 'pages/**/*.{ts,tsx}'],
   theme: {
     extend: {
       fontFamily: {
@@ -24,8 +21,14 @@ module.exports = {
           900: '#064E3B',
         },
       },
+      borderWidth: {
+        3: '3px',
+      },
       dropShadow: {
         green: '2px 2px 1px #047857',
+      },
+      screens: {
+        phone: { max: '639px' },
       },
       backgroundImage: {
         'radial-green':
@@ -37,5 +40,13 @@ module.exports = {
       },
     },
   },
-  plugins: [thonUI()],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+        '.border-green-to-yellow': {
+          borderImage: 'linear-gradient(90deg, #10B981, #FBBF24) 1',
+        },
+      });
+    },
+  ],
 };

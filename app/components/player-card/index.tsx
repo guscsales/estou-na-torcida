@@ -1,25 +1,28 @@
 import classNames from 'classnames';
 import Image from 'next/image';
-import { Text } from 'thon-ui';
+import type { Dictionary } from '../../i18n/format';
+import { translate } from '../../i18n/format';
+import { Text } from '../ui';
 import { Player } from '../../shared/models/player';
 
 type Props = {
   player: Player;
   active?: boolean;
+  dictionary: Dictionary;
 };
 
 export default function PlayerCard({
   player,
   active,
+  dictionary,
   ...props
 }: Props & React.HTMLAttributes<HTMLElement>) {
   const nameClassName = classNames(
-    `w-full py-1.5 px-3.5 rounded-xl relative
+    `w-full py-1.5 px-3.5 relative
     bg-clip-padding
     before:content-[''] before:border-3 before:border-solid before:border-transparent
     before:border-transparent before:border-green-to-yellow
     before:w-full before:h-14 before:absolute before:z-0 before:top-0 before:left-0
-    before:rounded-xl
     transition-all duration-200 ease-in-out`,
     {
       'bg-gray-200 group-hover:bg-gray-300': !active,
@@ -37,8 +40,10 @@ export default function PlayerCard({
 
   return (
     <button
-      className="group flex items-end w-full h-36 rounded-xl overflow-hidden"
-      aria-label={`Escolher o jogador ${player.name}`}
+      className="group flex items-end w-full h-36 overflow-hidden"
+      aria-label={translate(dictionary, 'player.selectAria', {
+        playerName: player.name,
+      })}
       {...props}
     >
       <div className={nameClassName}>
@@ -49,7 +54,9 @@ export default function PlayerCard({
           src={`/images/players/${player.id}.png`}
           width={149}
           height={132}
-          alt={`Foto do ${player.name}`}
+          alt={translate(dictionary, 'player.imageAlt', {
+            playerName: player.name,
+          })}
           className="absolute bottom-0 right-0 z-10 w-auto h-[132px]"
         />
       </div>

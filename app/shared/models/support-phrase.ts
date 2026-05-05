@@ -1,4 +1,4 @@
 export interface SupportPhrase {
   id: string;
-  phrase: string;
+  translationKey: string;
 }

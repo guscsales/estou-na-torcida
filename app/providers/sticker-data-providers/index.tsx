@@ -43,10 +43,14 @@ export default function StickerDataProvider({
 
   React.useEffect(() => {
     if (!stickerData?.user) {
-      const storedUser = localStorage.getItem('authUser');
-      const user = storedUser ? JSON.parse(storedUser) : null;
+      const timeout = window.setTimeout(() => {
+        const storedUser = localStorage.getItem('authUser');
+        const user = storedUser ? JSON.parse(storedUser) : null;
 
-      setStickerData((prevValue) => ({ ...prevValue, user }));
+        setStickerData((prevValue) => ({ ...prevValue, user }));
+      }, 0);
+
+      return () => window.clearTimeout(timeout);
     }
   }, [stickerData.user]);
 

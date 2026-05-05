@@ -2,13 +2,19 @@
 
 import React from 'react';
 import Container from '../container/index';
-import { Text } from 'thon-ui';
+import type { Dictionary } from '../../i18n/format';
+import { translate } from '../../i18n/format';
+import { Text } from '../ui';
 import PlayerCard from '../player-card';
 import { StickerDataContext } from '../../providers/sticker-data-providers/index';
 import { players } from '../../shared/data/players';
 import { Player } from '../../shared/models/player';
 
-export default function PlayerSection() {
+type Props = {
+  dictionary: Dictionary;
+};
+
+export default function PlayerSection({ dictionary }: Props) {
   const { stickerData, setStickerData } = React.useContext(StickerDataContext);
 
   function handleSelectPlayer(player: Player) {
@@ -23,11 +29,10 @@ export default function PlayerSection() {
           variant="3xl sm:4xl lg:5xl"
           className="text-emerald-700 mb-2"
         >
-          Escolha um jogador da seleção
+          {translate(dictionary, 'player.title')}
         </Text>
         <Text as="p" variant="sm sm:base" className="text-gray-500 w-10/12">
-          Esse jogador irá aparecer na sua imagem, você pode escolher qualquer
-          um e até mesmo o técnico.
+          {translate(dictionary, 'player.description')}
         </Text>
       </header>
       <div className="grid grid-cols-1 w-8/12 mx-auto sm:w-full sm:grid-cols-2 xl:grid-cols-3 gap-2">
@@ -36,6 +41,7 @@ export default function PlayerSection() {
             key={player.id}
             player={player}
             active={player.id === stickerData.player.id}
+            dictionary={dictionary}
             onClick={() => handleSelectPlayer(player)}
           />
         ))}
