@@ -273,10 +273,8 @@ function storiesCardComponent(params: Params, dictionary: Awaited<ReturnType<typ
 export async function GET(request: Request) {
   const params = getParams(request);
 
-  if (!params?.name || !params.pictureURL || !params.playerId || !params.phraseId) {
-    return new Response(null, {
-      status: 404,
-    });
+  if (!params?.playerId || !params.phraseId) {
+    return new Response(null, { status: 404 });
   }
 
   const dictionary = await getDictionary(params.locale);
